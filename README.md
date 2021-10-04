@@ -1,6 +1,6 @@
 # 3주차 미션: React-Messenger💌
 
-##서론
+## 서론
 안녕하세요 14기 프론트엔드 운영진 안건희입니다.🤗
 
 3주차 미션은 이전 주차 미션 때 사용하셨던 react hooks의 연장선입니다. 
@@ -19,17 +19,17 @@
 
 14기 프론트 짱짱~0~
 
-#미션
+# 미션
 
-##미션 목표
+## 미션 목표
 -useState로 컴포넌트의 상태를 관리할 수 있게된다.
 -useEffect의 사용법을 이해한다.
 -Styled-Components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법을 익힙니다.
 
-##기한
+## 기한
 - 2021년 10월 8일(금)까지 (마감 기한 꼭 지켜주세요)
-- 
-##필수요건
+
+## 필수요건
 -함수형 컴포넌트를 사용한다.
 -styled-component를 이용하여 스타일링 한다. 스타일링은 자유롭게! 기존에 있는 메신저를 가져오셔도 되고 완전히 독창적인걸 만드셔도 됩니다. 다만 기본 구성요소들은 지켜주세요! 그리고 색도 다양하게 넣어보시구요
 -상단바에 메시지를 보내는 사람의 프로필을 띄운다. + 상단바의 프로필로 메시지 발신자를 바꿀 수 있게 한다.
@@ -40,12 +40,12 @@
 -개발자도구에서 Style을 복사하지말고, 직접 styled-components를 사용하여 만드는 연습을 한다ㅠㅠ.
 -[결과 화면](https://react-messenger-13th2.vercel.app/chatlist/1)을 구현한다.
 
-##로컬 실행방법
+## 로컬 실행방법
 ---
 
 `npm start` : 로컬에서 react application을 자동으로 리로드하여 실행시켜줍니다.
 
-#링크 및 참고자료
+# 링크 및 참고자료
 ---
 
 - [create react app (CRA)](https://create-react-app.dev/docs/getting-started/)
