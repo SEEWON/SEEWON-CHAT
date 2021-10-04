@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Router from './Router';
 
-function App() {
-  return <Router />;
-}
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  return <Router isLoggedIn={isLoggedIn} />;
+};
 
 export default App;
