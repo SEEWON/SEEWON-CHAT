@@ -1,10 +1,8 @@
 import React from 'react';
+import Router from './Router';
 
 function App() {
-  return (
-    <div > 14기 프론트엔드 짱 =_=
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
