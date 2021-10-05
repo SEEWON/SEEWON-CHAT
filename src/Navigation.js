@@ -11,6 +11,9 @@ const Navigation = () => (
         <Link to="/chat">Chat</Link>
       </li>
       <li>
+        <Link to="/chatlist">ChatList</Link>
+      </li>
+      <li>
         <Link to="/profile">Profile</Link>
       </li>
     </ul>

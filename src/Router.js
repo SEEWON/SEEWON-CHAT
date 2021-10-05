@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Chat from './routes/Chat';
+import Navigation from './Navigation';
 import Home from './routes/Home';
+import Chat from './routes/Chat';
 import Profile from './routes/Profile';
 import LogIn from './routes/LogIn';
-import Navigation from './Navigation';
+import ChatList from './routes/ChatList';
 
 const Router = ({ isLoggedIn }) => {
   return (
@@ -15,6 +16,9 @@ const Router = ({ isLoggedIn }) => {
           <>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/chatlist">
+              <ChatList />
             </Route>
             <Route exact path="/chat">
               <Chat />
