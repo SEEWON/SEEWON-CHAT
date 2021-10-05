@@ -1,7 +1,14 @@
 import React from 'react';
 
-const Home = () => {
-  return <div>Home</div>;
+const Home = ({ friends }) => {
+  return (
+    <div className="friendsList">
+      {friends.map((friend) => {
+        <div></div>;
+      })}
+      ;
+    </div>
+  );
 };
 
 export default Home;

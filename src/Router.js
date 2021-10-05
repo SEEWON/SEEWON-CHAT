@@ -7,7 +7,7 @@ import Profile from './routes/Profile';
 import LogIn from './routes/LogIn';
 import ChatList from './routes/ChatList';
 
-const Router = ({ isLoggedIn }) => {
+const Router = ({ isLoggedIn, friends }) => {
   return (
     <BrowserRouter>
       {isLoggedIn && <Navigation />}
