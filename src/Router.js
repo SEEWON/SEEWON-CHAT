@@ -15,10 +15,10 @@ const Router = ({ isLoggedIn, friends }) => {
         {isLoggedIn ? (
           <>
             <Route exact path="/">
-              <Home />
+              <Home friends={friends} />
             </Route>
             <Route exact path="/chatlist">
-              <ChatList />
+              <ChatList friends={friends} />
             </Route>
             <Route exact path="/chat">
               <Chat />
