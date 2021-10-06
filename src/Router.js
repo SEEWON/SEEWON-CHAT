@@ -14,10 +14,10 @@ const Router = ({ isLoggedIn, friends }) => {
       <Switch>
         {isLoggedIn ? (
           <>
-            <Route exact path="/">
+            <Route exact path={`/`}>
               <Home friends={friends} />
             </Route>
-            <Route exact path="/chatlist">
+            <Route exact path={`/chatlist`}>
               <ChatList friends={friends} />
             </Route>
             {friends.map((friend) => {
@@ -25,17 +25,17 @@ const Router = ({ isLoggedIn, friends }) => {
                 <Chat friends={friends} />
               </Route>;
             })}
-            <Route exact path="/profile">
+            <Route exact path={`/profile`}>
               <Profile />
             </Route>
-            <Redirect from="*" to="/" />
+            <Redirect from={`*`} to={`/`} />
           </>
         ) : (
           <>
-            <Route exact path="/">
+            <Route exact path={`/`}>
               <LogIn />
             </Route>
-            <Redirect from="*" to="/" />
+            <Redirect from={`*`} to={`/`} />
           </>
         )}
       </Switch>

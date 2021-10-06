@@ -5,10 +5,10 @@ const Navigation = () => (
   <nav>
     <ul>
       <li>
-        <Link to="/">Home</Link>
+        <Link to={`/`}>Home</Link>
       </li>
       <li>
-        <Link to="/chatlist">ChatList</Link>
+        <Link to={`/chatlist`}>ChatList</Link>
       </li>
       <li>
         <Link to="/chat/1">Chat with 1</Link>
@@ -26,7 +26,7 @@ const Navigation = () => (
         <Link to="/chat/5">Chat with 5</Link>
       </li>
       <li>
-        <Link to="/profile">Profile</Link>
+        <Link to={`/profile`}>Profile</Link>
       </li>
     </ul>
   </nav>
