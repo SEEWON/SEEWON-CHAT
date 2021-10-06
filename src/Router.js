@@ -20,9 +20,11 @@ const Router = ({ isLoggedIn, friends }) => {
             <Route exact path="/chatlist">
               <ChatList friends={friends} />
             </Route>
-            <Route exact path="/chat">
-              <Chat />
-            </Route>
+            {friends.map((friend) => {
+              <Route exact path={`/chat/${friend.id}`}>
+                <Chat friends={friends} />
+              </Route>;
+            })}
             <Route exact path="/profile">
               <Profile />
             </Route>
