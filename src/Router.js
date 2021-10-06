@@ -7,7 +7,7 @@ import Profile from './routes/Profile';
 import LogIn from './routes/LogIn';
 import ChatList from './routes/ChatList';
 
-const Router = ({ isLoggedIn, friends }) => {
+const Router = ({ isLoggedIn, user, friends }) => {
   return (
     <BrowserRouter>
       {isLoggedIn && <Navigation />}
@@ -26,7 +26,7 @@ const Router = ({ isLoggedIn, friends }) => {
               </Route>;
             })}
             <Route exact path={`/profile`}>
-              <Profile />
+              <Profile user={user} />
             </Route>
             <Redirect from={`*`} to={`/`} />
           </>

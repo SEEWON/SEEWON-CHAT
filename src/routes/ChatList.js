@@ -10,7 +10,6 @@ const ChatList = ({ friends }) => {
           const { id, name, img } = friend;
           return (
             <Link to={`/chat/${id}`}>
-              Home
               <FriendProfile>
                 <FriendImg src={img}></FriendImg>
                 <FriendName>{name}</FriendName>
@@ -18,7 +17,6 @@ const ChatList = ({ friends }) => {
             </Link>
           );
         })}
-      ;
     </div>
   );
 };

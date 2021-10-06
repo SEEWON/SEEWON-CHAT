@@ -4,6 +4,12 @@ import DefaultImg from './DefaultProfile.png';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [user, setUser] = useState({
+    id: 723,
+    name: '유쿨',
+    img: DefaultImg,
+    status: '작은 차이가 명품을 만든다',
+  });
   const [friends, setFriends] = useState([
     { id: 1, name: '시원', img: DefaultImg, status: '열심히 살자' },
     { id: 2, name: '지우', img: DefaultImg, status: '히히' },
@@ -14,7 +20,7 @@ const App = () => {
 
   return (
     <>
-      <Router isLoggedIn={isLoggedIn} friends={friends} />
+      <Router isLoggedIn={isLoggedIn} user={user} friends={friends} />
     </>
   );
 };

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Chat = () => {
+const Chat = ({ friends }) => {
   return <div>chat</div>;
 };
 
