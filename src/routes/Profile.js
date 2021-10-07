@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Profile = (props) => {
+const Profile = ({ user }) => {
   return (
     <div>
       <UserProfile>
-        <UserImg src={props.user.img}></UserImg>
-        <UserName>{props.user.name}</UserName>
-        <UserStatus>{props.user.status}</UserStatus>
+        <UserImg src={user.img}></UserImg>
+        <UserName>{user.name}</UserName>
+        <UserStatus>{user.status}</UserStatus>
       </UserProfile>
     </div>
   );
