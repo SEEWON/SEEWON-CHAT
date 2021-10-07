@@ -4,28 +4,32 @@ import styled from 'styled-components';
 const Chat = ({ friend, user }) => {
   const [userIsTalking, setUserIsTalking] = useState(true);
   const [inputText, setInputText] = useState('');
-  const [chatCnt, setChatCnt] = useState(5);
-  const [friendChat, setFriendChat] = useState([
-    { text: 'ㅋㅋㅋ', cnt: 1 },
-    { text: 'ㅎㅎㅎ', cnt: 3 },
-  ]);
-  const [userChat, setUserChat] = useState([
-    { text: '웅?', cnt: 2 },
-    { text: '왜웃어', cnt: 4 },
+  const [chats, setChats] = useState([
+    { userChat: false, text: 'ㅋㅋㅋ', cnt: 0 },
+    { userChat: true, text: '웅?', cnt: 1 },
+    { userChat: false, text: 'ㅎㅎㅎ', cnt: 2 },
+    { userChat: true, text: '왜웃어', cnt: 3 },
   ]);
 
-  const onSubmit = (event) => {
+  const handleSubmitChat = (event) => {
     event.preventDefault();
     userIsTalking
-      ? setUserChat(...userChat, { text: inputText, cnt: chatCnt })
-      : setFriendChat(...friendChat, { text: inputText, cnt: chatCnt });
-    setChatCnt(chatCnt + 1);
+      ? setChats([
+          ...chats,
+          { userChat: true, text: inputText, cnt: chats.length },
+        ])
+      : setChats([
+          ...chats,
+          { userChat: false, text: inputText, cnt: chats.length },
+        ]);
     setInputText('');
+    console.log(chats);
   };
 
   return (
-    <div className="chatScreen">
-      <WhoIsTalking
+    <ChatWrapper>
+      {/* Define Who is going to talk */}
+      <DefineTalker
         friend={friend}
         user={user}
         onClick={() => {
@@ -33,47 +37,68 @@ const Chat = ({ friend, user }) => {
         }}
       >
         {userIsTalking ? (
-          <TalkingProfile>
-            <TalkingImg src={user.img}></TalkingImg>
-            <TalkingName>{user.name}</TalkingName>
-          </TalkingProfile>
+          <TalkerProfile>
+            <TalkerImg src={user.img}></TalkerImg>
+            <TalkerName>{user.name}</TalkerName>
+          </TalkerProfile>
         ) : (
-          <TalkingProfile>
-            <TalkingImg src={friend.img}></TalkingImg>
-            <TalkingName>{friend.name}</TalkingName>
-          </TalkingProfile>
+          <TalkerProfile>
+            <TalkerImg src={friend.img}></TalkerImg>
+            <TalkerName>{friend.name}</TalkerName>
+          </TalkerProfile>
         )}
-      </WhoIsTalking>
-      <form onSubmit={onSubmit}>
-        <input
-          placeholder="보낼 메시지 입력"
-          value={inputText}
-          type="text"
-          onChange={(e) => {
-            setInputText(e.target.value);
-          }}
-        />
-        <input type="submit" value="보내기" />
-      </form>
-    </div>
+      </DefineTalker>
+
+      <ChattingScreen>
+        {chats.map((chat) => {
+          const { userChat, text } = chat;
+          return userChat ? (
+            <UserChat>{text}</UserChat>
+          ) : (
+            <FriendChat>{text}</FriendChat>
+          );
+        })}
+      </ChattingScreen>
+
+      <InputTextForm>
+        <form onSubmit={handleSubmitChat}>
+          <input
+            placeholder="보낼 메시지 입력"
+            value={inputText}
+            type="text"
+            onChange={(e) => {
+              setInputText(e.target.value);
+            }}
+          />
+          <input type="submit" value="보내기" />
+        </form>
+      </InputTextForm>
+    </ChatWrapper>
   );
 };
 
-const WhoIsTalking = styled.div``;
+const ChatWrapper = styled.div``;
 
-const TalkingProfile = styled.div`
+const DefineTalker = styled.div``;
+const TalkerProfile = styled.div`
   max-width: 200px;
   /* max-height: 50px; */
   display: flex;
   flex-direction: column;
   margin: 5px;
 `;
-const TalkingImg = styled.img`
+const TalkerImg = styled.img`
   max-width: 50px;
   max-height: 50px;
   width: auto;
   height: auto;
 `;
-const TalkingName = styled.div``;
+const TalkerName = styled.div``;
+
+const ChattingScreen = styled.div``;
+const UserChat = styled.div``;
+const FriendChat = styled.div``;
+
+const InputTextForm = styled.div``;
 
 export default Chat;
