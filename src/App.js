@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Router from './Router';
 import DefaultImg from './DefaultProfile.png';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -20,9 +21,18 @@ const App = () => {
 
   return (
     <>
+      <GlobalStyle />
       <Router isLoggedIn={isLoggedIn} user={user} friends={friends} />
     </>
   );
 };
+
+const GlobalStyle = createGlobalStyle`
+body {
+  margin: 0;
+  display: flex;
+  overflow: hidden;
+  }
+`;
 
 export default App;

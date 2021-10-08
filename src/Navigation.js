@@ -1,34 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { AiTwotoneHome, AiFillWechat, AiOutlineUser } from 'react-icons/ai';
 
 const Navigation = () => (
   <nav>
-    <ul>
-      <li>
-        <Link to={`/`}>Home</Link>
-      </li>
-      <li>
-        <Link to={`/chatlist`}>ChatList</Link>
-      </li>
-      <li>
-        <Link to="/chat/1">Chat with 1</Link>
-      </li>
-      <li>
-        <Link to="/chat/2">Chat with 2</Link>
-      </li>
-      <li>
-        <Link to="/chat/3">Chat with 3</Link>
-      </li>
-      <li>
-        <Link to="/chat/4">Chat with 4</Link>
-      </li>
-      <li>
-        <Link to="/chat/5">Chat with 5</Link>
-      </li>
-      <li>
-        <Link to={`/profile`}>Profile</Link>
-      </li>
-    </ul>
+    <NavContainer>
+      <NavItem>
+        <Link to={`/`}>
+          <AiTwotoneHome size="30" color="#1C0C5B" />
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link to={`/chatlist`}>
+          <AiFillWechat size="30" color="#1C0C5B" />
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link to={`/profile`}>
+          <AiOutlineUser size="30" color="#1C0C5B" />
+        </Link>
+      </NavItem>
+    </NavContainer>
   </nav>
 );
+
+const NavContainer = styled.div`
+  height: 97vh;
+  display: flex;
+  flex-direction: column;
+  padding: 3vh 20px 0px 20px;
+  background-color: #ffffff;
+`;
+const NavItem = styled.div`
+  list-style: none;
+  margin-bottom: 20px;
+`;
+
 export default Navigation;
