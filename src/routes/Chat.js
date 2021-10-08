@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import MyBubble from './MyBubble.png';
 import YourBubble from './YourBubble.png';
@@ -13,7 +13,10 @@ const Chat = ({ friend, user }) => {
     { userChat: false, text: '흐흐', cnt: 2 },
     { userChat: true, text: '왜웃어', cnt: 3 },
   ]);
-
+  const scrollRef = useRef();
+  useEffect(() => {
+    scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
+  });
   const handleSubmitChat = (event) => {
     event.preventDefault();
     if (inputText === '') {
@@ -56,7 +59,7 @@ const Chat = ({ friend, user }) => {
         )}
       </DefineTalker>
 
-      <ChattingScreen>
+      <ChattingScreen ref={scrollRef}>
         {chats.map((chat) => {
           const { userChat, text } = chat;
           return userChat ? (
