@@ -13,6 +13,10 @@ const Chat = ({ friend, user }) => {
 
   const handleSubmitChat = (event) => {
     event.preventDefault();
+    if (inputText === '') {
+      alert('보낼 메시지를 입력하세요');
+      return false;
+    }
     userIsTalking
       ? setChats([
           ...chats,
