@@ -13,10 +13,13 @@ const Chat = ({ friend, user }) => {
     { userChat: false, text: '흐흐', cnt: 2 },
     { userChat: true, text: '왜웃어', cnt: 3 },
   ]);
+
+  //Scroll Event
   const scrollRef = useRef();
   useEffect(() => {
     scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
   });
+
   const handleSubmitChat = (event) => {
     event.preventDefault();
     if (inputText === '') {

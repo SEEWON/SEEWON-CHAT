@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Navigation from './Navigation';
-import Home from './routes/Home';
-import Chat from './routes/Chat';
-import Profile from './routes/Profile';
-import LogIn from './routes/LogIn';
-import ChatList from './routes/ChatList';
+import Home from '../routes/Home';
+import Chat from '../routes/Chat';
+import Profile from '../routes/Profile';
+import LogIn from '../routes/LogIn';
+import ChatList from '../routes/ChatList';
 import styled from 'styled-components';
 
 const Router = ({ isLoggedIn, user, friends }) => {
