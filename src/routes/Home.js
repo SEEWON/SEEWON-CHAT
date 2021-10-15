@@ -13,7 +13,7 @@ const Home = ({ friends }) => {
               <FriendName>{name}</FriendName>
               <FriendStatus>{status}</FriendStatus>
             </FriendProfile>
-          );
+          );          
         })}
     </div>
   );

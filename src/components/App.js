@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router from './Router';
 import DefaultImg from './DefaultProfile.png';
 import styled, { createGlobalStyle } from 'styled-components';
+import { onAuthStateChanged } from '@firebase/auth';
+import { FBauth } from '../fbase';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({
     id: 723,
     name: '유쿨',
