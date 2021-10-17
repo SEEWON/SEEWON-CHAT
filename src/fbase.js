@@ -15,4 +15,5 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export const FBauth = getAuth();
+FBauth.languageCode = 'ko';
 export const FBdb = getFirestore();

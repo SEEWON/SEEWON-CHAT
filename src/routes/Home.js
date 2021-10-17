@@ -6,14 +6,14 @@ const Home = ({ friends }) => {
     <div className="friendsList">
       {friends &&
         friends.map((friend) => {
-          const { id, name, img, status } = friend;
+          const { name, img, status } = friend;
           return (
             <FriendProfile>
               <FriendImg src={img}></FriendImg>
               <FriendName>{name}</FriendName>
               <FriendStatus>{status}</FriendStatus>
             </FriendProfile>
-          );          
+          );
         })}
     </div>
   );
