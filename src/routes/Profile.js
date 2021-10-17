@@ -11,6 +11,7 @@ const Profile = ({ userObj }) => {
     event.preventDefault();
     await updateProfile(userObj, { displayName: userName });
   };
+
   return (
     <div>
       <UserProfile>
@@ -18,10 +19,15 @@ const Profile = ({ userObj }) => {
         <form onSubmit={handleSubmitName}>
           <input
             type="text"
-            value={userObj.displayName}
+            required
+            value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
-          <input type="submit" value="이름 수정하기" />
+          {console.log(userName)}
+          <input
+            type="submit"
+            value={userObj.displayName ? '닉네임 변경' : '닉네임 결정!'}
+          />
         </form>
       </UserProfile>
       <LogOutButton onClick={() => signOut(FBauth)}>
