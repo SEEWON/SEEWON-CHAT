@@ -33,20 +33,16 @@ const LogIn = () => {
           .confirm(code)
           .then((result) => {
             // User signed in successfully.
-            const user = result.user;
-            // ...
-            console.log('로그인 완료');
+            console.log('로그인 성공');
           })
           .catch((error) => {
             // User couldn't sign in (bad verification code?)
-            // ...
-            console.log(error);
+            setError(error.message);
           });
       })
       .catch((error) => {
         // Error; SMS not sent
-        // ...
-        console.log(error);
+        setError(error.message);
       });
   };
 
@@ -61,9 +57,11 @@ const LogIn = () => {
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-
         <input type="submit" value="Go!" />
       </form>
+      {error}
+      {error &&
+        '에러가 발생했습니다. 페이지를 새로고침하고 다시 시도해 주세요.'}
     </>
   );
 };
