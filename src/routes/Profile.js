@@ -1,13 +1,26 @@
-import React from 'react';
+import { updateProfile } from '@firebase/auth';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Profile = ({ user }) => {
+const Profile = ({ userObj }) => {
+  const [userName, setUserName] = useState(userObj.displayName);
+
+  const handleSubmitName = async (event) => {
+    event.preventDefault();
+    await updateProfile(userObj, { displayName: userName });
+  };
   return (
     <div>
       <UserProfile>
-        <UserImg src={user.img}></UserImg>
-        <UserName>{user.name}</UserName>
-        <UserStatus>{user.status}</UserStatus>
+        <UserImg src={userObj.photoURL}></UserImg>
+        <form onSubmit={handleSubmitName}>
+          <input
+            type="text"
+            value={userObj.displayName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <input type="submit" value="이름 수정하기" />
+        </form>
       </UserProfile>
     </div>
   );
@@ -26,7 +39,5 @@ const UserImg = styled.img`
   width: auto;
   height: auto;
 `;
-const UserName = styled.div``;
-const UserStatus = styled.div``;
 
 export default Profile;

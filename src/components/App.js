@@ -3,11 +3,25 @@ import Router from './Router';
 import DefaultImg from './DefaultProfile.png';
 import { createGlobalStyle } from 'styled-components';
 import { FBauth } from '../fbase';
-import { updateCurrentUser } from '@firebase/auth';
+import { onAuthStateChanged } from '@firebase/auth';
 
 const App = () => {
+  const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(FBauth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setUserObj(user);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+    console.log(userObj);
+  });
 
   const [user, setUser] = useState({
     id: 723,
@@ -24,14 +38,21 @@ const App = () => {
     { id: 5, name: '친구3', img: DefaultImg, status: '친구3 상메' },
   ]);
 
-  useEffect(() => {
-    updateCurrentUser(FBauth);
-  });
-
   return (
     <>
-      <GlobalStyle />
-      <Router isLoggedIn={isLoggedIn} user={user} friends={friends} />
+      {init ? (
+        <>
+          <GlobalStyle />
+          <Router
+            isLoggedIn={isLoggedIn}
+            userObj={userObj}
+            user={user}
+            friends={friends}
+          />
+        </>
+      ) : (
+        'Initializing...'
+      )}
     </>
   );
 };

@@ -8,30 +8,34 @@ import LogIn from '../routes/LogIn';
 import ChatList from '../routes/ChatList';
 import styled from 'styled-components';
 
-const Router = ({ isLoggedIn, user, friends }) => {
+const Router = ({ isLoggedIn, userObj, user, friends }) => {
   return (
     <Appwrapper>
       <BrowserRouter>
         {isLoggedIn && <Navigation />}
         <Switch>
           {isLoggedIn ? (
-            <InteractingSpaceWrapper>
-              <Route exact path={`/`}>
-                <Home friends={friends} />
-              </Route>
-              <Route exact path={`/chatlist`}>
-                <ChatList friends={friends} />
-              </Route>
-              {friends.map((friend) => (
-                <Route exact path={`/chat/${friend.id}`}>
-                  <Chat friend={friend} user={user} />
+            userObj.displayName ? (
+              <InteractingSpaceWrapper>
+                <Route exact path={`/`}>
+                  <Home friends={friends} />
                 </Route>
-              ))}
-              <Route exact path={`/profile`}>
-                <Profile user={user} />
-              </Route>
-              <Redirect from={`*`} to={`/`} />
-            </InteractingSpaceWrapper>
+                <Route exact path={`/chatlist`}>
+                  <ChatList friends={friends} />
+                </Route>
+                {friends.map((friend) => (
+                  <Route exact path={`/chat/${friend.id}`}>
+                    <Chat friend={friend} user={user} />
+                  </Route>
+                ))}
+                <Route exact path={`/profile`}>
+                  <Profile userObj={userObj} />
+                </Route>
+                <Redirect from={`*`} to={`/`} />
+              </InteractingSpaceWrapper>
+            ) : (
+              <Profile userObj={userObj} />
+            )
           ) : (
             <>
               <Route exact path={`/`}>

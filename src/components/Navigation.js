@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { AiTwotoneHome, AiFillWechat, AiOutlineUser } from 'react-icons/ai';
+import { HiOutlineLogout } from 'react-icons/hi';
+import { signOut } from '@firebase/auth';
+import { FBauth } from '../fbase';
 
 const Navigation = () => (
   <nav>
@@ -21,6 +24,9 @@ const Navigation = () => (
           <AiOutlineUser size="30" color="#1C0C5B" />
         </Link>
       </NavItem>
+      <NavItem onClick={() => signOut(FBauth)}>
+        <HiOutlineLogout size="30" color="#1C0C5B" />
+      </NavItem>
     </NavContainer>
   </nav>
 );
@@ -35,6 +41,9 @@ const NavContainer = styled.div`
 const NavItem = styled.div`
   list-style: none;
   margin-bottom: 20px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export default Navigation;
