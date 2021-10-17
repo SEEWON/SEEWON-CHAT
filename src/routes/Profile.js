@@ -23,7 +23,6 @@ const Profile = ({ userObj }) => {
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
-          {console.log(userName)}
           <input
             type="submit"
             value={userObj.displayName ? '닉네임 변경' : '닉네임 결정!'}

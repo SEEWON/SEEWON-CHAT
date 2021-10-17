@@ -16,6 +16,7 @@ const Router = ({ isLoggedIn, userObj, user, friends }) => {
         <Switch>
           {isLoggedIn ? (
             userObj.displayName ? (
+              // 처음 로그인하는 사람(displayName===null)은 <Profile />로 이동해 닉네임 설정
               <InteractingSpaceWrapper>
                 <Route exact path={`/`}>
                   <Home friends={friends} />
