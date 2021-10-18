@@ -8,7 +8,7 @@ import LogIn from '../routes/LogIn';
 import ChatList from '../routes/ChatList';
 import styled from 'styled-components';
 
-const Router = ({ isLoggedIn, userObj, user, friends }) => {
+const Router = ({ refreshUser, isLoggedIn, userObj, user, friends }) => {
   return (
     <Appwrapper>
       <BrowserRouter>
@@ -30,12 +30,12 @@ const Router = ({ isLoggedIn, userObj, user, friends }) => {
                   </Route>
                 ))}
                 <Route exact path={`/profile`}>
-                  <Profile userObj={userObj} />
+                  <Profile refreshUser={refreshUser} userObj={userObj} />
                 </Route>
                 <Redirect from={`*`} to={`/`} />
               </InteractingSpaceWrapper>
             ) : (
-              <Profile userObj={userObj} />
+              <Profile refreshUser={refreshUser} userObj={userObj} />
             )
           ) : (
             <>

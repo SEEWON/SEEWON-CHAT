@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBAbnGBeoy5mu-cDgDxry-bq9d2Erp0VbQ',
@@ -17,3 +18,4 @@ initializeApp(firebaseConfig);
 export const FBauth = getAuth();
 FBauth.languageCode = 'ko';
 export const FBdb = getFirestore();
+export const FBstorage = getStorage();

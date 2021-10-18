@@ -23,6 +23,12 @@ const App = () => {
     console.log(userObj);
   });
 
+  const refreshUser = () => {
+    const userNow = FBauth.currentUser;
+    setUserObj({ ...userNow });
+    setUserObj(userNow);
+  };
+
   const [user, setUser] = useState({
     id: 723,
     name: '유쿨',
@@ -44,6 +50,7 @@ const App = () => {
         <>
           <GlobalStyle />
           <Router
+            refreshUser={refreshUser}
             isLoggedIn={isLoggedIn}
             userObj={userObj}
             user={user}
