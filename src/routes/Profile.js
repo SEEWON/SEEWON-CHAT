@@ -25,6 +25,7 @@ const Profile = ({ refreshUser, userObj }) => {
     });
     //프로필 이미지 변경 시 리렌더링을 위해 <App /> 에서부터 refreshUser props 전달
     refreshUser();
+    setFileURL('');
   };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -38,9 +39,7 @@ const Profile = ({ refreshUser, userObj }) => {
   return (
     <div>
       <UserProfile>
-        <UserImg
-          src={userObj.photoURL ? userObj.photoURL : DefaultProfile}
-        ></UserImg>
+        <UserImg src={userObj.photoURL ? userObj.photoURL : DefaultProfile} />
         <form onSubmit={handleSubmitProfile}>
           <input
             type="text"
@@ -49,15 +48,12 @@ const Profile = ({ refreshUser, userObj }) => {
             onChange={(e) => setUserName(e.target.value)}
           />
           <input type="file" accept="image/*" onChange={handleFileChange} />
-
           <input
             type="submit"
             value={userObj.displayName ? '프로필 변경!' : '프로필 결정!'}
           />
-          {/* TODO: 로그아웃 주의사항 표시하기 : 
-          로그인 정보는 세션에 저장되니 로그아웃 하지 않아도 됨
-          재로그인 시 휴대폰 재인증 필요 */}
         </form>
+        <img src={fileURL} />
       </UserProfile>
       <LogOutButton onClick={() => signOut(FBauth)}>
         <HiOutlineLogout size="30" color="#1C0C5B" />

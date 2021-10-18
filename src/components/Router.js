@@ -35,7 +35,9 @@ const Router = ({ refreshUser, isLoggedIn, userObj, user, friends }) => {
                 <Redirect from={`*`} to={`/`} />
               </InteractingSpaceWrapper>
             ) : (
-              <Profile refreshUser={refreshUser} userObj={userObj} />
+              <InteractingSpaceWrapper>
+                <Profile refreshUser={refreshUser} userObj={userObj} />
+              </InteractingSpaceWrapper>
             )
           ) : (
             <>
