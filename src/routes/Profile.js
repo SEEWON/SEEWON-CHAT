@@ -39,7 +39,11 @@ const Profile = ({ refreshUser, userObj }) => {
   return (
     <div>
       <UserProfile>
-        <UserImg src={userObj.photoURL ? userObj.photoURL : DefaultProfile} />
+        {fileURL ? (
+          <img src={fileURL} />
+        ) : (
+          <UserImg src={userObj.photoURL ? userObj.photoURL : DefaultProfile} />
+        )}
         <form onSubmit={handleSubmitProfile}>
           <input
             type="text"
@@ -53,7 +57,6 @@ const Profile = ({ refreshUser, userObj }) => {
             value={userObj.displayName ? '프로필 변경!' : '프로필 결정!'}
           />
         </form>
-        <img src={fileURL} />
       </UserProfile>
       <LogOutButton onClick={() => signOut(FBauth)}>
         <HiOutlineLogout size="30" color="#1C0C5B" />

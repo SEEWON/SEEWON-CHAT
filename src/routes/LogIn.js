@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FBauth } from '../fbase';
 
 const LogIn = () => {
-  const [phoneNumber, setPhoneNumber] = useState('01011112222'); //01011112222
+  const [phoneNumber, setPhoneNumber] = useState('01011112222'); //01011112222 01022221111 01012345678 01087654321
   const [error, setError] = useState('');
 
   const setUpRecaptcha = () => {
