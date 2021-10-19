@@ -4,12 +4,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBAbnGBeoy5mu-cDgDxry-bq9d2Erp0VbQ',
-  authDomain: 'react-messenger-ccf46.firebaseapp.com',
-  projectId: 'react-messenger-ccf46',
-  storageBucket: 'react-messenger-ccf46.appspot.com',
-  messagingSenderId: '1080935127693',
-  appId: '1:1080935127693:web:5c14d6a1eb13ba157f20c4',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const admin = require('firebase-admin');
