@@ -12,15 +12,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
-const admin = require('firebase-admin');
-
-const serviceAccount = require('./serviceAcountKey.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://react-messenger-ccf46-default-rtdb.firebaseio.com',
-});
-
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
