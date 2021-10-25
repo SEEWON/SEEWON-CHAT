@@ -1,38 +1,34 @@
-import React from 'react';
+import { getDownloadURL, listAll, ref } from '@firebase/storage';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { FBstorage } from '../fbase';
+import EachProfile from './EachProfile';
 
-const Home = ({ friends }) => {
+const Home = () => {
+  let temp = new Array();
+  const [profileList, setProfileList] = useState([]);
+  //Storage에서 프로필 사진 목록 불러오기
+
+  useEffect(() => {
+    const listProfile = async () => {
+      const profileRef = ref(FBstorage);
+      const listResult = await listAll(profileRef);
+      for (let imageRef of listResult.items) {
+        const url = await getDownloadURL(imageRef);
+        temp.push(url);
+      }
+      setProfileList(temp);
+    };
+    listProfile();
+  }, []);
+
   return (
-    <div className="friendsList">
-      {friends &&
-        friends.map((friend) => {
-          const { name, img, status } = friend;
-          return (
-            <FriendProfile>
-              <FriendImg src={img}></FriendImg>
-              <FriendName>{name}</FriendName>
-              <FriendStatus>{status}</FriendStatus>
-            </FriendProfile>
-          );
-        })}
+    <div className="profileList">
+      {profileList.map((profileURL) => {
+        return <EachProfile profileURL={profileURL} />;
+      })}
     </div>
   );
 };
-
-const FriendProfile = styled.div`
-  max-width: 200px;
-  /* max-height: 50px; */
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-`;
-const FriendImg = styled.img`
-  max-width: 50px;
-  max-height: 50px;
-  width: auto;
-  height: auto;
-`;
-const FriendName = styled.div``;
-const FriendStatus = styled.div``;
 
 export default Home;

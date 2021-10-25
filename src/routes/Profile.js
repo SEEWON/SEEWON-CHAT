@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FBauth, FBstorage } from '../fbase';
 import { signOut, updateProfile } from '@firebase/auth';
 import { getDownloadURL, ref, uploadString } from '@firebase/storage';
-import { v4 as uuidv4 } from 'uuid';
 import { HiOutlineLogout } from 'react-icons/hi';
 import DefaultProfile from '../components/DefaultProfile.png';
 import styled from 'styled-components';
@@ -15,7 +14,7 @@ const Profile = ({ refreshUser, userObj }) => {
     event.preventDefault();
     let FBprofileImgURL = '';
     if (fileURL !== '') {
-      const profileImgRef = ref(FBstorage, `${userObj.uid}/${uuidv4()}`);
+      const profileImgRef = ref(FBstorage, `${userName}_${userObj.uid}`);
       const response = await uploadString(profileImgRef, fileURL, 'data_url');
       FBprofileImgURL = await getDownloadURL(response.ref);
     }
@@ -40,7 +39,7 @@ const Profile = ({ refreshUser, userObj }) => {
     <div>
       <UserProfile>
         {fileURL ? (
-          <img src={fileURL} />
+          <img src={fileURL} alt="미리보기" />
         ) : (
           <UserImg src={userObj.photoURL ? userObj.photoURL : DefaultProfile} />
         )}
