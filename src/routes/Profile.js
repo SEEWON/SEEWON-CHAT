@@ -42,10 +42,15 @@ const Profile = ({ refreshUser, userObj }) => {
     };
     reader.readAsDataURL(file);
   };
+  const disabled = () => {
+    if (userObj.displayName) return true;
+    else return false;
+  };
 
   return (
     <div>
       <UserProfile>
+        {!userObj.displayName && '프로필 등록 후 채팅을 시작할 수 있어요!'}
         {fileURL ? (
           <img src={fileURL} alt="미리보기" />
         ) : (
@@ -56,8 +61,10 @@ const Profile = ({ refreshUser, userObj }) => {
             type="text"
             required
             value={userName}
+            disabled={disabled()}
             onChange={(e) => setUserName(e.target.value)}
           />
+          <div>주의: 처음 등록한 닉네임은 변경할 수 없습니다!</div>
           <input type="file" accept="image/*" onChange={handleFileChange} />
           <input
             type="submit"
@@ -68,9 +75,11 @@ const Profile = ({ refreshUser, userObj }) => {
       <LogOutButton onClick={() => signOut(FBauth)}>
         <HiOutlineLogout size="30" color="#1C0C5B" />
       </LogOutButton>
-      {/* TODO: 로그아웃 주의사항 표시하기 : 
-      로그인 정보는 세션에 저장되니 로그아웃 하지 않아도 됨
-      재로그인 시 휴대폰 재인증 필요 */}
+      <div>
+        {userObj.displayName &&
+          `주의: 로그인 정보는 세션에 저장되니 로그아웃 하지 않아도 됩니다!
+      로그아웃 후 다시 로그인 시 휴대폰 인증을 다시 요구합니다`}
+      </div>
     </div>
   );
 };
