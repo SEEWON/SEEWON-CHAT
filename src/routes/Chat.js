@@ -4,7 +4,7 @@ import MyBubble from './MyBubble.png';
 import YourBubble from './YourBubble.png';
 import { AiOutlineSend } from 'react-icons/ai';
 
-const Chat = ({ friend, user }) => {
+const Chat = ({ userObj, friendUid }) => {
   const [userIsTalking, setUserIsTalking] = useState(true);
   const [inputText, setInputText] = useState('');
   const [chats, setChats] = useState([

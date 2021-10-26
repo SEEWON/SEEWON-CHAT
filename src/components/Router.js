@@ -42,15 +42,15 @@ const Router = ({
                     uidList={uidList}
                   />
                 </Route>
-                {uidList.map((uid, index) => {
-                  if (userObj.uid !== uid) {
+                {uidList.map((friendUid, index) => {
+                  if (userObj.uid !== friendUid) {
                     return (
                       <Route
                         exact
-                        path={`/chat/${userObj.uid}-${uidList[index]}`}
+                        path={`/chat/${userObj.uid}-${friendUid}`}
                         key={index}
                       >
-                        <Chat />
+                        <Chat userObj={userObj} friendUid={friendUid} />
                       </Route>
                     );
                   }

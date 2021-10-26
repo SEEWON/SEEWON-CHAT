@@ -26,20 +26,6 @@ const ChatList = ({ userObj, profileImgList, profileNameList, uidList }) => {
     </div>
   );
 };
-// <div className="friendsList">
-//   {friends &&
-//     friends.map((friend) => {
-//       const { id, name, img } = friend;
-//       return (
-//         <Link to={`/chat/${id}`}>
-//           <FriendProfile>
-//             <FriendImg src={img}></FriendImg>
-//             <FriendName>{name}</FriendName>
-//           </FriendProfile>
-//         </Link>
-//       );
-//     })}
-// </div>
 
 const FriendsProfile = styled.div``;
 
