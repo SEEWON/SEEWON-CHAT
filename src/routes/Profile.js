@@ -3,8 +3,9 @@ import { FBauth, FBstorage } from '../fbase';
 import { signOut, updateProfile } from '@firebase/auth';
 import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 import { HiOutlineLogout } from 'react-icons/hi';
-import DefaultProfile from '../components/DefaultProfile.png';
+import DefaultProfile from './DefaultProfile.png';
 import styled from 'styled-components';
+import { DataURL } from './DataURL';
 
 const Profile = ({ refreshUser, userObj }) => {
   const [userName, setUserName] = useState(userObj.displayName);
@@ -13,9 +14,16 @@ const Profile = ({ refreshUser, userObj }) => {
   const handleSubmitProfile = async (event) => {
     event.preventDefault();
     let FBprofileImgURL = '';
+    //첨부파일이 있을 경우
     if (fileURL !== '') {
       const profileImgRef = ref(FBstorage, `${userName}_${userObj.uid}`);
       const response = await uploadString(profileImgRef, fileURL, 'data_url');
+      FBprofileImgURL = await getDownloadURL(response.ref);
+    }
+    //프로필사진을 등록하지 않았을 경우
+    else {
+      const profileImgRef = ref(FBstorage, `${userName}_${userObj.uid}`);
+      const response = await uploadString(profileImgRef, DataURL, 'data_url');
       FBprofileImgURL = await getDownloadURL(response.ref);
     }
     await updateProfile(userObj, {
