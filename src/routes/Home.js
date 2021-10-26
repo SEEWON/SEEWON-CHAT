@@ -5,8 +5,11 @@ import { FBstorage } from '../fbase';
 import EachProfile from './EachProfile';
 
 const Home = ({ userObj }) => {
-  let temp = new Array();
-  const [profileList, setProfileList] = useState([]);
+  let tempImg = new Array();
+  let tempName = new Array();
+  const [profileImgList, setProfileImgList] = useState([]);
+  const [profileNameList, setProfileNameList] = useState([]);
+
   //Storage에서 프로필 사진 목록 불러오기
 
   useEffect(() => {
@@ -15,9 +18,11 @@ const Home = ({ userObj }) => {
       const listResult = await listAll(profileRef);
       for (let imageRef of listResult.items) {
         const url = await getDownloadURL(imageRef);
-        temp.push(url);
+        tempName.push(imageRef._location.path_.split('$')[0]);
+        tempImg.push(url);
       }
-      setProfileList(temp);
+      setProfileImgList(tempImg);
+      setProfileNameList(tempName);
     };
     listProfile();
   }, []);
@@ -27,12 +32,20 @@ const Home = ({ userObj }) => {
       <MyProfile>
         <div>MyProfile</div>
         <MyImg src={userObj.photoURL} />
+        <div>{userObj.displayName}</div>
       </MyProfile>
       <FriendsProfile>
         <div>FriendsProfile</div>
-        {profileList.map((profileURL) => {
+        {profileImgList.map((profileURL, index) => {
+          // 자신의 프로필을 제외하고 렌더링
           if (userObj.photoURL !== profileURL)
-            return <EachProfile profileURL={profileURL} />;
+            return (
+              <EachProfile
+                profileURL={profileURL}
+                profileName={profileNameList[index]}
+                key={index}
+              />
+            );
         })}
         {console.log(userObj)}
       </FriendsProfile>

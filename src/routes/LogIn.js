@@ -28,7 +28,7 @@ const LogIn = () => {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
         window.confirmationResult = confirmationResult;
-        let code = window.prompt('코드를 입력하세요');
+        let code = window.prompt('휴대폰 번호로 전송된 인증코드를 입력하세요');
         confirmationResult
           .confirm(code)
           .then((result) => {

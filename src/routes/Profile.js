@@ -16,13 +16,13 @@ const Profile = ({ refreshUser, userObj }) => {
     let FBprofileImgURL = '';
     //첨부파일이 있을 경우
     if (fileURL !== '') {
-      const profileImgRef = ref(FBstorage, `${userName}_${userObj.uid}`);
+      const profileImgRef = ref(FBstorage, `${userName}$${userObj.uid}`);
       const response = await uploadString(profileImgRef, fileURL, 'data_url');
       FBprofileImgURL = await getDownloadURL(response.ref);
     }
     //프로필사진을 등록하지 않았을 경우
     else {
-      const profileImgRef = ref(FBstorage, `${userName}_${userObj.uid}`);
+      const profileImgRef = ref(FBstorage, `${userName}$${userObj.uid}`);
       const response = await uploadString(profileImgRef, DataURL, 'data_url');
       FBprofileImgURL = await getDownloadURL(response.ref);
     }

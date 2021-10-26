@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const EachProfile = ({ profileURL }) => {
+const EachProfile = ({ profileURL, profileName }) => {
   return (
     <div>
       <FriendImg src={profileURL} />
+      <div>{profileName}</div>
     </div>
   );
 };
