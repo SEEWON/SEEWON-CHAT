@@ -8,7 +8,16 @@ import LogIn from '../routes/LogIn';
 import ChatList from '../routes/ChatList';
 import styled from 'styled-components';
 
-const Router = ({ refreshUser, isLoggedIn, userObj, user, friends }) => {
+const Router = ({
+  refreshUser,
+  isLoggedIn,
+  userObj,
+  user,
+  friends,
+  profileImgList,
+  profileNameList,
+  uidList,
+}) => {
   return (
     <Appwrapper>
       <BrowserRouter>
@@ -19,16 +28,33 @@ const Router = ({ refreshUser, isLoggedIn, userObj, user, friends }) => {
               // 처음 로그인하는 사람(displayName===null)은 <Profile />로 이동해 닉네임 설정
               <InteractingSpaceWrapper>
                 <Route exact path={`/`}>
-                  <Home userObj={userObj} />
+                  <Home
+                    userObj={userObj}
+                    profileImgList={profileImgList}
+                    profileNameList={profileNameList}
+                  />
                 </Route>
                 <Route exact path={`/chatlist`}>
-                  <ChatList friends={friends} />
+                  <ChatList
+                    userObj={userObj}
+                    profileImgList={profileImgList}
+                    profileNameList={profileNameList}
+                    uidList={uidList}
+                  />
                 </Route>
-                {friends.map((friend) => (
-                  <Route exact path={`/chat/${friend.id}`}>
-                    <Chat friend={friend} user={user} />
-                  </Route>
-                ))}
+                {uidList.map((uid, index) => {
+                  if (userObj.uid !== uid) {
+                    return (
+                      <Route
+                        exact
+                        path={`/chat/${userObj.uid}-${uidList[index]}`}
+                        key={index}
+                      >
+                        <Chat />
+                      </Route>
+                    );
+                  }
+                })}
                 <Route exact path={`/profile`}>
                   <Profile refreshUser={refreshUser} userObj={userObj} />
                 </Route>

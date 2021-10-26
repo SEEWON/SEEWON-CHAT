@@ -14,13 +14,13 @@ const Profile = ({ refreshUser, userObj }) => {
   const handleSubmitProfile = async (event) => {
     event.preventDefault();
     let FBprofileImgURL = '';
-    //첨부파일이 있을 경우
+    //첨부파일이 있을 경우 Firebase Storage에 파일 등록, URL 받아오기
     if (fileURL !== '') {
       const profileImgRef = ref(FBstorage, `${userName}$${userObj.uid}`);
       const response = await uploadString(profileImgRef, fileURL, 'data_url');
       FBprofileImgURL = await getDownloadURL(response.ref);
     }
-    //프로필사진을 등록하지 않았을 경우
+    //프로필사진을 등록하지 않았을 경우 기본 프로필사진 등록
     else {
       const profileImgRef = ref(FBstorage, `${userName}$${userObj.uid}`);
       const response = await uploadString(profileImgRef, DataURL, 'data_url');
@@ -63,6 +63,7 @@ const Profile = ({ refreshUser, userObj }) => {
             value={userName}
             disabled={disabled()}
             onChange={(e) => setUserName(e.target.value)}
+            placeholder="닉네임을 입력하세요"
           />
           <div>주의: 처음 등록한 닉네임은 변경할 수 없습니다!</div>
           <input type="file" accept="image/*" onChange={handleFileChange} />
