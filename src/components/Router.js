@@ -19,7 +19,7 @@ const Router = ({ refreshUser, isLoggedIn, userObj, user, friends }) => {
               // 처음 로그인하는 사람(displayName===null)은 <Profile />로 이동해 닉네임 설정
               <InteractingSpaceWrapper>
                 <Route exact path={`/`}>
-                  <Home friends={friends} />
+                  <Home userObj={userObj} />
                 </Route>
                 <Route exact path={`/chatlist`}>
                   <ChatList friends={friends} />
