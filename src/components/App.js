@@ -90,7 +90,7 @@ body {
 
 const RootContainer = styled.div`
   width: 360px;
-  height: 540px;
+  height: 600px;
   border: 1px solid gray;
 
   display: flex;
@@ -99,7 +99,6 @@ const RootContainer = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 `;
 
 export default App;
