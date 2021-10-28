@@ -8,17 +8,17 @@ const Navigation = () => (
     <NavContainer>
       <NavItem>
         <Link to={`/`}>
-          <AiTwotoneHome size="30" color="#1C0C5B" />
+          <AiTwotoneHome size="30" color="#777777" />
         </Link>
       </NavItem>
       <NavItem>
         <Link to={`/chatlist`}>
-          <AiFillWechat size="30" color="#1C0C5B" />
+          <AiFillWechat size="30" color="#777777" />
         </Link>
       </NavItem>
       <NavItem>
         <Link to={`/profile`}>
-          <AiOutlineUser size="30" color="#1C0C5B" />
+          <AiOutlineUser size="30" color="#777777" />
         </Link>
       </NavItem>
     </NavContainer>

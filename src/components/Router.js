@@ -70,12 +70,12 @@ const Router = ({
               </InteractingSpaceWrapper>
             )
           ) : (
-            <>
+            <InteractingSpaceWrapper>
               <Route exact path={`/`}>
                 <LogIn />
               </Route>
               <Redirect from={`*`} to={`/`} />
-            </>
+            </InteractingSpaceWrapper>
           )}
         </Switch>
       </BrowserRouter>
@@ -84,6 +84,8 @@ const Router = ({
 };
 
 const Appwrapper = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   overflow: hidden;
 `;
@@ -91,8 +93,7 @@ const Appwrapper = styled.div`
 const InteractingSpaceWrapper = styled.div`
   width: 100%;
   height: 100%;
-
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  /* background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); */
 `;
 
 export default Router;

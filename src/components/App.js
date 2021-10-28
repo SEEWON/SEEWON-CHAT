@@ -82,19 +82,30 @@ body {
   margin: 0;
   display: flex;
   overflow: hidden;
-  border: 1px solid red;
   justify-content: center;
   align-items: center;
+  background-image: linear-gradient(180deg, #c8c6c6 50%, #f7f6f2 50%);
+  /* background-color: #F7F6F2; */
   }
 `;
 
 const RootContainer = styled.div`
   width: 360px;
   height: 600px;
+  border-radius: 1rem;
   border: 1px solid gray;
+  background-image: linear-gradient(180deg, #f7f6f2 50%, #c8c6c6 50%);
 
+  background-color: #f0e5cf;
   display: flex;
-  overflow: scroll;
+  overflow: auto;
+  @font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 `;
 const Wrapper = styled.div`
   width: 100%;
