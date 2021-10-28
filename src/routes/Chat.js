@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import MyBubble from './MyBubble.png';
-import YourBubble from './YourBubble.png';
 import { AiOutlineSend } from 'react-icons/ai';
 
-const Chat = ({ userObj, friendUid }) => {
+const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
   const [userIsTalking, setUserIsTalking] = useState(true);
   const [inputText, setInputText] = useState('');
   const [chats, setChats] = useState([
@@ -31,6 +29,10 @@ const Chat = ({ userObj, friendUid }) => {
   return (
     <ChatWrapper>
       {/* Define Who is going to talk */}
+      {console.log(userObj)}
+      {console.log(friendUid)}
+      {console.log(friendImg)}
+      {console.log(friendName)}
 
       <ChattingScreen ref={scrollRef}></ChattingScreen>
 

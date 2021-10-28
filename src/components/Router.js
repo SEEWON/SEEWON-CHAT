@@ -12,8 +12,6 @@ const Router = ({
   refreshUser,
   isLoggedIn,
   userObj,
-  user,
-  friends,
   profileImgList,
   profileNameList,
   uidList,
@@ -43,6 +41,7 @@ const Router = ({
                   />
                 </Route>
                 {uidList.map((friendUid, index) => {
+                  //uidList에서 user의 uid가 호출되는 경우를 제외하기 위한 if문
                   if (userObj.uid !== friendUid) {
                     return (
                       <Route
@@ -50,7 +49,12 @@ const Router = ({
                         path={`/chat/${userObj.uid}-${friendUid}`}
                         key={index}
                       >
-                        <Chat userObj={userObj} friendUid={friendUid} />
+                        <Chat
+                          userObj={userObj}
+                          friendUid={friendUid}
+                          friendImg={profileImgList[index]}
+                          friendName={profileNameList[index]}
+                        />
                       </Route>
                     );
                   }

@@ -78,8 +78,8 @@ const Profile = ({ refreshUser, userObj }) => {
       </LogOutButton>
       <div>
         {userObj.displayName &&
-          `주의: 로그인 정보는 세션에 저장되니 로그아웃 하지 않아도 됩니다!
-      로그아웃 후 다시 로그인 시 휴대폰 인증을 다시 요구합니다`}
+          `주의: 로그인 정보는 세션에 자동으로 저장됩니다!
+          로그아웃할 경우 다음 로그인 시 휴대폰 인증을 다시 요구합니다`}
       </div>
     </div>
   );
