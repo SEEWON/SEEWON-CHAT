@@ -97,7 +97,9 @@ const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
   );
 };
 
-const ChatWrapper = styled.div``;
+const ChatWrapper = styled.div`
+  display: flex;
+`;
 
 const ChattingScreen = styled.div`
   display: flex;
