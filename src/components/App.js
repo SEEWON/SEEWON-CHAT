@@ -24,9 +24,9 @@ const App = () => {
   });
 
   //Storage에서 프로필 사진, 닉네임 목록 불러오기
-  let tempImg = new Array();
-  let tempName = new Array();
-  let tempUid = new Array();
+  let tempImg = [];
+  let tempName = [];
+  let tempUid = [];
   const [profileImgList, setProfileImgList] = useState([]);
   const [profileNameList, setProfileNameList] = useState([]);
   const [uidList, setUidList] = useState([]);
@@ -44,7 +44,6 @@ const App = () => {
       setProfileImgList(tempImg);
       setUidList(tempUid);
       setProfileNameList(tempName);
-      console.log(uidList);
     };
     listProfile();
   }, []);

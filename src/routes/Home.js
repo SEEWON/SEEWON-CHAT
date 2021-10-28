@@ -21,7 +21,6 @@ const Home = ({ userObj, profileImgList, profileNameList }) => {
               </div>
             );
         })}
-        {console.log(userObj)}
       </FriendsProfile>
     </div>
   );

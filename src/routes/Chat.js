@@ -5,12 +5,6 @@ import { AiOutlineSend } from 'react-icons/ai';
 const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
   const [userIsTalking, setUserIsTalking] = useState(true);
   const [inputText, setInputText] = useState('');
-  const [chats, setChats] = useState([
-    { userChat: false, text: '😀', cnt: 0 },
-    { userChat: true, text: 'ㅎㅋㅎ 안녕!', cnt: 1 },
-    { userChat: false, text: '흐흐', cnt: 2 },
-    { userChat: true, text: '왜웃어', cnt: 3 },
-  ]);
 
   //Scroll Event
   const scrollRef = useRef();
