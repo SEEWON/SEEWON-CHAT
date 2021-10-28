@@ -21,7 +21,6 @@ const ChatList = ({ userObj, profileImgList, profileNameList, uidList }) => {
               </div>
             );
         })}
-        {console.log(userObj)}
       </FriendsProfile>
     </div>
   );

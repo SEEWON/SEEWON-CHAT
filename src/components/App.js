@@ -20,7 +20,6 @@ const App = () => {
       }
       setInit(true);
     });
-    console.log(userObj);
   });
 
   //Storage에서 프로필 사진, 닉네임 목록 불러오기
