@@ -99,6 +99,7 @@ const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
 
 const ChatWrapper = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const ChattingScreen = styled.div`
@@ -114,8 +115,7 @@ const EachMsg = styled.div``;
 
 const MessageForm = styled.div`
   border-radius: 1rem;
-  height: 7vh;
-  width: 94.45vw;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,14 +123,11 @@ const MessageForm = styled.div`
   background-color: #f3f3df;
 `;
 const InputChat = styled.input`
-  width: 30vw;
   text-align: center;
-  transform: translate(0%, -25%);
 `;
 const InputButton = styled.button`
   background: transparent;
   border: none;
-  transform: translate(0%, 10%);
   margin: 10px;
 `;
 

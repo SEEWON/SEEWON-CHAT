@@ -8,6 +8,7 @@ const Home = ({ userObj, profileImgList, profileNameList }) => {
         <div>MyProfile</div>
         <MyImg src={userObj.photoURL} />
         <div>{userObj.displayName}</div>
+        {console.log(userObj)}
       </MyProfile>
       <FriendsProfile>
         <div>FriendsProfile</div>

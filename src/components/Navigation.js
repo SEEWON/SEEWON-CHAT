@@ -26,8 +26,8 @@ const Navigation = () => (
 );
 
 const NavContainer = styled.div`
-  height: 97vh;
   display: flex;
+  height: 100%;
   flex-direction: column;
   padding: 3vh 20px 0px 20px;
   background-color: #ffffff;
