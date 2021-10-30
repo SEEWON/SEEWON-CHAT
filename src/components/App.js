@@ -84,8 +84,7 @@ body {
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(180deg, #c8c6c6 50%, #f7f6f2 50%);
-  /* background-color: #F7F6F2; */
+  background-image: linear-gradient(#c8c6c6 50%, #f7f6f2 50%);
   }
 `;
 
@@ -93,9 +92,8 @@ const RootContainer = styled.div`
   width: 360px;
   height: 600px;
   border-radius: 1rem;
-  border: 1px solid gray;
-  background-image: linear-gradient(180deg, #f7f6f2 50%, #c8c6c6 50%);
-
+  border: 1.5px solid gray;
+  background-image: linear-gradient(#f7f6f2 50%, #c8c6c6 50%);
   background-color: #f0e5cf;
   display: flex;
   overflow: auto;
@@ -106,6 +104,7 @@ const RootContainer = styled.div`
     font-weight: normal;
     font-style: normal;
   }
+  font-family: 'GowunDodum-Regular';
 `;
 const Wrapper = styled.div`
   width: 100%;

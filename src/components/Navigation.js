@@ -29,7 +29,7 @@ const NavContainer = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-  padding: 3vh 20px 0px 20px;
+  padding: 20px 20px 0px 20px;
   background-color: #ffffff;
 `;
 const NavItem = styled.div`
