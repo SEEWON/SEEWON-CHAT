@@ -73,25 +73,36 @@ const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
               key={index}
               userTalking={eachMsg.talker === userObj.uid ? true : false}
             >
+              {
+                /*연속해서 채팅 올 경우 친구 프로필 한번만 표시*/
+                chatArrayData[index - 1] &&
+                  chatArrayData[index - 1].talker !== eachMsg.talker &&
+                  eachMsg.talker !== userObj.uid && (
+                    <FriendProfile>
+                      <FriendImg src={friendImg} />
+                      <FriendName>{friendName}</FriendName>
+                    </FriendProfile>
+                  )
+              }
               <EachMsg>{eachMsg.msg}</EachMsg>
             </EachMsgContainer>
           );
         })}
       </ChattingScreen>
       <MessageForm>
-        <form onSubmit={handleSubmitForm}>
+        <Form onSubmit={handleSubmitForm}>
           <InputChat
-            placeholder="보낼 메시지 입력"
+            placeholder="보낼 메시지를 입력하세요"
             value={message}
             type="text"
             onChange={(e) => {
               setMessage(e.target.value);
             }}
           />
-          <InputButton type="submit">
-            <AiOutlineSend size="25" color="#1C0C5B" />
-          </InputButton>
-        </form>
+          {/* <InputButton type="submit">
+            <AiOutlineSend size="15" color="#1C0C5B" />
+          </InputButton> */}
+        </Form>
       </MessageForm>
     </ChatWrapper>
   );
@@ -100,30 +111,58 @@ const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
 const ChatWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 `;
 
 const ChattingScreen = styled.div`
+  height: 80%;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 const EachMsgContainer = styled.div`
   display: flex;
   justify-content: ${(props) =>
     props.userTalking ? 'flex-end' : 'flex-start'};
 `;
+const FriendProfile = styled.div`
+  display: flex;
+  border: 1px solid green;
+`;
+const FriendImg = styled.img`
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+`;
+const FriendName = styled.div``;
 const EachMsg = styled.div``;
 
 const MessageForm = styled.div`
-  border-radius: 1rem;
-
+  width: 100%;
+  height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #1c0c5b;
-  background-color: #f3f3df;
+  background-color: #f7f6f2;
+  border-top: 1px solid gray;
 `;
-const InputChat = styled.input`
-  text-align: center;
+const Form = styled.form`
+  width: 100%;
+  height: 100%;
+`;
+const InputChat = styled.textarea`
+  width: 93%;
+  height: 80%;
+  background-color: #f7f6f2;
+  font-size: 1rem;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 10px;
+  border: none;
+  resize: none;
+  outline: none;
+  box-shadow: none;
 `;
 const InputButton = styled.button`
   background: transparent;

@@ -45,9 +45,7 @@ const ProfileBox = styled.div`
   margin: 10px;
 `;
 const ProfileImg = styled.img`
-  max-width: 100px;
-  max-height: 100px;
-  width: auto;
+  width: 100px;
   height: auto;
   object-fit: contain;
   border-right: 1px dashed gray;
