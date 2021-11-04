@@ -27,8 +27,10 @@ const App = () => {
   let tempImg = [];
   let tempName = [];
   let tempUid = [];
+  let tempProfile = [];
   const [profileImgList, setProfileImgList] = useState([]);
   const [profileNameList, setProfileNameList] = useState([]);
+  const [profileList, setProfileList] = useState([]);
   const [uidList, setUidList] = useState([]);
 
   useEffect(() => {
@@ -41,9 +43,13 @@ const App = () => {
         tempUid.push(imageRef._location.path_.split('$')[1]);
         tempImg.push(url);
       }
-      setProfileImgList(tempImg);
+      tempName.forEach((eachName, index) => {
+        tempProfile.push({ name: eachName, img: tempImg[index] });
+      });
+      setProfileList(tempProfile);
       setUidList(tempUid);
       setProfileNameList(tempName);
+      setProfileImgList(tempImg);
     };
     listProfile();
   }, []);
@@ -63,8 +69,7 @@ const App = () => {
             refreshUser={refreshUser}
             isLoggedIn={isLoggedIn}
             userObj={userObj}
-            profileImgList={profileImgList}
-            profileNameList={profileNameList}
+            profileList={profileList}
             uidList={uidList}
           />
         </Wrapper>

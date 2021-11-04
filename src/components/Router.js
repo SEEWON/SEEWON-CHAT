@@ -8,14 +8,7 @@ import LogIn from '../routes/LogIn';
 import ChatList from '../routes/ChatList';
 import styled from 'styled-components';
 
-const Router = ({
-  refreshUser,
-  isLoggedIn,
-  userObj,
-  profileImgList,
-  profileNameList,
-  uidList,
-}) => {
+const Router = ({ refreshUser, isLoggedIn, userObj, profileList, uidList }) => {
   return (
     <Appwrapper>
       <BrowserRouter>
@@ -26,17 +19,12 @@ const Router = ({
               // 처음 로그인하는 사람(displayName===null)은 <Profile />로 이동해 닉네임 설정
               <InteractingSpaceWrapper>
                 <Route exact path={`/`}>
-                  <Home
-                    userObj={userObj}
-                    profileImgList={profileImgList}
-                    profileNameList={profileNameList}
-                  />
+                  <Home userObj={userObj} profileList={profileList} />
                 </Route>
                 <Route exact path={`/chatlist`}>
                   <ChatList
                     userObj={userObj}
-                    profileImgList={profileImgList}
-                    profileNameList={profileNameList}
+                    profileList={profileList}
                     uidList={uidList}
                   />
                 </Route>
@@ -52,8 +40,7 @@ const Router = ({
                         <Chat
                           userObj={userObj}
                           friendUid={friendUid}
-                          friendImg={profileImgList[index]}
-                          friendName={profileNameList[index]}
+                          friend={profileList[index]}
                         />
                       </Route>
                     );

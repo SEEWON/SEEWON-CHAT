@@ -4,7 +4,7 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { FBrealtime } from '../fbase';
 import { onValue, ref, set } from '@firebase/database';
 
-const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
+const Chat = ({ userObj, friendUid, friend }) => {
   const [message, setMessage] = useState('');
   const [chatObjData, setChatObjData] = useState();
   const [chatArrayData, setChatArrayData] = useState([]);
@@ -79,8 +79,8 @@ const Chat = ({ userObj, friendUid, friendImg, friendName }) => {
                   chatArrayData[index - 1].talker !== eachMsg.talker &&
                   eachMsg.talker !== userObj.uid && (
                     <FriendProfile>
-                      <FriendImg src={friendImg} />
-                      <FriendName>{friendName}</FriendName>
+                      <FriendImg src={friend.img} />
+                      <FriendName>{friend.name}</FriendName>
                     </FriendProfile>
                   )
               }

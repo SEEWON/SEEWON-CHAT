@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const ChatList = ({ userObj, profileImgList, profileNameList, uidList }) => {
+const ChatList = ({ userObj, profileList, uidList }) => {
+  const [searchFriend, setSearchFriend] = useState('');
+  const [renderProfileList, setRenderProfileList] = useState([]);
+
+  useEffect(() => {
+    setRenderProfileList([...profileList]);
+  }, [profileList]);
+  useEffect(() => {
+    setRenderProfileList(
+      profileList.filter((item) =>
+        item.name.toLowerCase().includes(searchFriend.toLowerCase())
+      )
+    );
+  }, [searchFriend]);
+
   return (
     <FriendsProfile>
       <Banner>대화 목록</Banner>
-      {profileImgList.map((profileURL, index) => {
+      <SearchFriend
+        type="text"
+        placeholder="친구를 검색해 보세요!"
+        onChange={(e) => setSearchFriend(e.target.value)}
+      ></SearchFriend>
+      {renderProfileList.map((friend, index) => {
         // 자신의 프로필을 제외하고 렌더링
-        if (userObj.photoURL !== profileURL)
+        if (userObj.photoURL !== friend.img)
           return (
             <ProfileBox key={index}>
-              <ProfileImg src={profileURL} />
+              <ProfileImg src={friend.img} />
               <LinkContainer>
                 {/* 링크는 user의 uid - 상대방의 uid로 구성 */}
                 <Link to={`/chat/${userObj.uid}-${uidList[index]}`}>
-                  <Button>{profileNameList[index]}님과 채팅 시작!</Button>
+                  <Button>{friend.name}님과 채팅 시작!</Button>
                 </Link>
               </LinkContainer>
             </ProfileBox>
@@ -33,6 +52,9 @@ const Banner = styled.div`
   padding-left: 3px;
   display: flex;
   align-items: center;
+`;
+const SearchFriend = styled.input`
+  margin: 2px 1px 0px 1px;
 `;
 const ProfileBox = styled.div`
   height: 100px;

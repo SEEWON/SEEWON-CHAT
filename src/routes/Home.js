@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Home = ({ userObj, profileImgList, profileNameList }) => {
+const Home = ({ userObj, profileList }) => {
+  const [searchFriend, setSearchFriend] = useState('');
+  const [renderProfileList, setRenderProfileList] = useState([]);
+
+  //비동기적으로 작동하는 setState에서 profileNameList값이 호출된 후 renderNameList, renderImgList state에 정상적으로 값을 넣어주기 위해 spread operator 사용
+  useEffect(() => {
+    setRenderProfileList([...profileList]);
+  }, [profileList]);
+
+  //검색 시 renderNameList, renderImgList를 수정해 주는 useEffect
+  useEffect(() => {
+    setRenderProfileList(
+      profileList.filter((item) =>
+        item.name.toLowerCase().includes(searchFriend.toLowerCase())
+      )
+    );
+  }, [searchFriend]);
+
   return (
     <HomeWrapper>
       <Banner>내 프로필</Banner>
@@ -10,14 +27,19 @@ const Home = ({ userObj, profileImgList, profileNameList }) => {
         <Name>{userObj.displayName}</Name>
       </ProfileBox>
       <Banner>친구 프로필</Banner>
+      <SearchFriend
+        type="text"
+        placeholder="친구를 검색해 보세요!"
+        onChange={(e) => setSearchFriend(e.target.value)}
+      ></SearchFriend>
       <FriendsProfileList>
-        {profileImgList.map((profileURL, index) => {
+        {renderProfileList.map((friend, index) => {
           // 자신의 프로필을 제외하고 렌더링
-          if (userObj.photoURL !== profileURL)
+          if (userObj.displayName !== friend.name)
             return (
               <ProfileBox key={index}>
-                <ProfileImg src={profileURL} />
-                <Name>{profileNameList[index]}</Name>
+                <ProfileImg src={friend.img} />
+                <Name>{friend.name}</Name>
               </ProfileBox>
             );
         })}
@@ -37,6 +59,9 @@ const Banner = styled.div`
   padding-left: 3px;
   display: flex;
   align-items: center;
+`;
+const SearchFriend = styled.input`
+  margin: 2px 1px 0px 1px;
 `;
 const ProfileBox = styled.div`
   height: 100px;
