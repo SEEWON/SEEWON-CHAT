@@ -28,8 +28,6 @@ const App = () => {
   let tempName = [];
   let tempUid = [];
   let tempProfile = [];
-  const [profileImgList, setProfileImgList] = useState([]);
-  const [profileNameList, setProfileNameList] = useState([]);
   const [profileList, setProfileList] = useState([]);
   const [uidList, setUidList] = useState([]);
 
@@ -48,8 +46,6 @@ const App = () => {
       });
       setProfileList(tempProfile);
       setUidList(tempUid);
-      setProfileNameList(tempName);
-      setProfileImgList(tempImg);
     };
     listProfile();
   }, []);

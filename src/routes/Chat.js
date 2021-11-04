@@ -42,7 +42,7 @@ const Chat = ({ userObj, friendUid, friend }) => {
 
     //공백 메시지 입력 방지
     if (message === '') {
-      alert('보낼 메시지를 입력하세요');
+      alert('보낼 메시지를 입력하세요.');
       return false;
     }
 
@@ -64,15 +64,25 @@ const Chat = ({ userObj, friendUid, friend }) => {
     setMessage('');
   };
 
+  //카카오톡처럼 엔터 입력 시 Form submit되게 구현, 줄바꿈은 shift + enter
+  const onEnterPress = (e) => {
+    if (e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      handleSubmitForm(e);
+    }
+  };
   return (
     <ChatWrapper>
       <ChattingScreen ref={scrollRef}>
+        <>
+          <FriendProfile>
+            <FriendImg src={friend.img} />
+            <FriendName>{friend.name}</FriendName>
+          </FriendProfile>
+        </>
         {chatArrayData.map((eachMsg, index) => {
           return (
-            <EachMsgContainer
-              key={index}
-              userTalking={eachMsg.talker === userObj.uid ? true : false}
-            >
+            <>
               {
                 /*연속해서 채팅 올 경우 친구 프로필 한번만 표시*/
                 chatArrayData[index - 1] &&
@@ -84,24 +94,32 @@ const Chat = ({ userObj, friendUid, friend }) => {
                     </FriendProfile>
                   )
               }
-              <EachMsg>{eachMsg.msg}</EachMsg>
-            </EachMsgContainer>
+              <EachMsgContainer
+                key={index}
+                userTalking={eachMsg.talker === userObj.uid ? true : false}
+              >
+                <EachMsg>{eachMsg.msg}</EachMsg>
+              </EachMsgContainer>
+            </>
           );
         })}
       </ChattingScreen>
       <MessageForm>
         <Form onSubmit={handleSubmitForm}>
           <InputChat
-            placeholder="보낼 메시지를 입력하세요"
+            placeholder="보낼 메시지를 입력하세요."
             value={message}
             type="text"
             onChange={(e) => {
               setMessage(e.target.value);
             }}
+            onKeyDown={(e) => {
+              onEnterPress(e);
+            }}
           />
-          {/* <InputButton type="submit">
-            <AiOutlineSend size="15" color="#1C0C5B" />
-          </InputButton> */}
+          <InputButton type="submit">
+            <Send>전송</Send>
+          </InputButton>
         </Form>
       </MessageForm>
     </ChatWrapper>
@@ -116,32 +134,45 @@ const ChatWrapper = styled.div`
 `;
 
 const ChattingScreen = styled.div`
+  width: 100%;
   height: 80%;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
 `;
 const EachMsgContainer = styled.div`
+  width: ${(props) => (props.userTalking ? '99%' : '80%')};
   display: flex;
   justify-content: ${(props) =>
     props.userTalking ? 'flex-end' : 'flex-start'};
+  margin-left: ${(props) => !props.userTalking && '50px'};
+  position: relative;
+  bottom: 27px;
 `;
 const FriendProfile = styled.div`
   display: flex;
-  border: 1px solid green;
 `;
 const FriendImg = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 `;
-const FriendName = styled.div``;
-const EachMsg = styled.div``;
+const FriendName = styled.div`
+  width: 50%;
+`;
+const EachMsg = styled.div`
+  max-width: 80%;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 7px;
+  margin: 3px;
+`;
 
 const MessageForm = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   background-color: #f7f6f2;
@@ -152,7 +183,7 @@ const Form = styled.form`
   height: 100%;
 `;
 const InputChat = styled.textarea`
-  width: 93%;
+  width: 75%;
   height: 80%;
   background-color: #f7f6f2;
   font-size: 1rem;
@@ -165,9 +196,19 @@ const InputChat = styled.textarea`
   box-shadow: none;
 `;
 const InputButton = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 2px;
   background: transparent;
   border: none;
-  margin: 10px;
+  cursor: pointer;
+`;
+const Send = styled.div`
+  padding: 3px 6px;
+  border: 0.5px solid gray;
+  border-radius: 10%;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+  background-color: #c8c6c6;
 `;
 
 export default Chat;

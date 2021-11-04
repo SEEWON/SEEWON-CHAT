@@ -27,11 +27,13 @@ const Home = ({ userObj, profileList }) => {
         <Name>{userObj.displayName}</Name>
       </ProfileBox>
       <Banner>친구 프로필</Banner>
-      <SearchFriend
-        type="text"
-        placeholder="친구를 검색해 보세요!"
-        onChange={(e) => setSearchFriend(e.target.value)}
-      ></SearchFriend>
+      <SearchWrapper>
+        <SearchFriend
+          type="text"
+          placeholder="친구를 검색해 보세요!"
+          onChange={(e) => setSearchFriend(e.target.value)}
+        ></SearchFriend>
+      </SearchWrapper>
       <FriendsProfileList>
         {renderProfileList.map((friend, index) => {
           // 자신의 프로필을 제외하고 렌더링
@@ -60,8 +62,15 @@ const Banner = styled.div`
   display: flex;
   align-items: center;
 `;
+const SearchWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const SearchFriend = styled.input`
-  margin: 2px 1px 0px 1px;
+  width: 90%;
+  padding: 5px;
+  margin: 5px 1px -3px 1px;
+  text-align: center;
 `;
 const ProfileBox = styled.div`
   height: 100px;
