@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Navigation from './Navigation';
-import Home from '../routes/Home';
 import Chat from '../routes/Chat';
 import Profile from '../routes/Profile';
 import LogIn from '../routes/LogIn';
-import ChatList from '../routes/ChatList';
 import styled from 'styled-components';
 
-const Router = ({ refreshUser, isLoggedIn, userObj, profileList, uidList }) => {
+const Home = lazy(() => import('../routes/Home'));
+const ChatList = lazy(() => import('../routes/ChatList'));
+
+const Router = ({ refreshUser, isLoggedIn, userObj, profileList }) => {
   return (
     <Appwrapper>
       <BrowserRouter>
@@ -18,35 +19,30 @@ const Router = ({ refreshUser, isLoggedIn, userObj, profileList, uidList }) => {
             userObj.displayName ? (
               // 처음 로그인하는 사람(displayName===null)은 <Profile />로 이동해 닉네임 설정
               <InteractingSpaceWrapper>
-                <Route exact path={`/`}>
-                  <Home userObj={userObj} profileList={profileList} />
-                </Route>
-                <Route exact path={`/chatlist`}>
-                  <ChatList
-                    userObj={userObj}
-                    profileList={profileList}
-                    uidList={uidList}
-                  />
-                </Route>
-                {uidList.map((friendUid, index) => {
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Route exact path={`/`}>
+                    <Home userObj={userObj} profileList={profileList} />
+                  </Route>
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Route path={`/chatlist`}>
+                    <ChatList userObj={userObj} profileList={profileList} />
+                  </Route>
+                </Suspense>
+                {profileList.map((profile, index) => {
                   //uidList에서 user의 uid가 호출되는 경우를 제외하기 위한 if문
-                  if (userObj.uid !== friendUid) {
+                  if (userObj.uid !== profile.uid) {
                     return (
                       <Route
-                        exact
-                        path={`/chat/${userObj.uid}-${friendUid}`}
+                        path={`/chat/${userObj.uid}-${profile.uid}`}
                         key={index}
                       >
-                        <Chat
-                          userObj={userObj}
-                          friendUid={friendUid}
-                          friend={profileList[index]}
-                        />
+                        <Chat userObj={userObj} friend={profileList[index]} />
                       </Route>
                     );
                   }
                 })}
-                <Route exact path={`/profile`}>
+                <Route path={`/profile`}>
                   <Profile refreshUser={refreshUser} userObj={userObj} />
                 </Route>
                 <Redirect from={`*`} to={`/`} />
@@ -76,7 +72,6 @@ const Appwrapper = styled.div`
   display: flex;
   overflow: hidden;
 `;
-
 const InteractingSpaceWrapper = styled.div`
   width: 100%;
   height: 100%;

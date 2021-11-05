@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { RecaptchaVerifier, signInWithPhoneNumber } from '@firebase/auth';
 import { FBauth } from '../fbase';
+import { RecaptchaVerifier, signInWithPhoneNumber } from '@firebase/auth';
 import styled from 'styled-components';
 
 const LogIn = () => {
-  const [phoneNumber, setPhoneNumber] = useState('01011112222'); //01011112222 01022221111 01012345678 01087654321
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
 
   const setUpRecaptcha = () => {
@@ -49,22 +49,22 @@ const LogIn = () => {
 
   return (
     <LogInWrapper>
+      <ErrorMsg>
+        {error}
+        {error &&
+          '에러가 발생했습니다. 페이지를 새로고침하고 다시 시도해 주세요.'}
+      </ErrorMsg>
       <Form onSubmit={onSignInSubmit}>
         <div id="recaptcha-container"></div>
         <HPinput
           type="tel"
-          placeholder="Input your phone number"
+          placeholder="휴대폰 번호를 입력하세요."
           required
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <Submit type="submit" value="Go!" />
       </Form>
-      <ErrorMsg>
-        {error}
-        {error &&
-          '에러가 발생했습니다. 페이지를 새로고침하고 다시 시도해 주세요.'}
-      </ErrorMsg>
     </LogInWrapper>
   );
 };
@@ -99,6 +99,13 @@ const Submit = styled.input`
   }
 `;
 const ErrorMsg = styled.div`
+  width: 260px;
+  color: crimson;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 20%;
+  left: 33%;
   font-family: 'GowunDodum-Regular';
 `;
 export default LogIn;

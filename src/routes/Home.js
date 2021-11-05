@@ -10,7 +10,7 @@ const Home = ({ userObj, profileList }) => {
     setRenderProfileList([...profileList]);
   }, [profileList]);
 
-  //검색 시 renderNameList, renderImgList를 수정해 주는 useEffect
+  //검색 시 renderProfileList를 수정해 주는 useEffect
   useEffect(() => {
     setRenderProfileList(
       profileList.filter((item) =>
@@ -20,7 +20,7 @@ const Home = ({ userObj, profileList }) => {
   }, [searchFriend]);
 
   return (
-    <HomeWrapper>
+    <>
       <Banner>내 프로필</Banner>
       <ProfileBox>
         <ProfileImg src={userObj.photoURL} />
@@ -34,26 +34,20 @@ const Home = ({ userObj, profileList }) => {
           onChange={(e) => setSearchFriend(e.target.value)}
         ></SearchFriend>
       </SearchWrapper>
-      <FriendsProfileList>
-        {renderProfileList.map((friend, index) => {
-          // 자신의 프로필을 제외하고 렌더링
-          if (userObj.displayName !== friend.name)
-            return (
-              <ProfileBox key={index}>
-                <ProfileImg src={friend.img} />
-                <Name>{friend.name}</Name>
-              </ProfileBox>
-            );
-        })}
-      </FriendsProfileList>
-    </HomeWrapper>
+      {renderProfileList.map((friend, index) => {
+        // 자신의 프로필을 제외하고 렌더링
+        if (userObj.uid !== friend.uid)
+          return (
+            <ProfileBox key={index}>
+              <ProfileImg src={friend.img} />
+              <Name>{friend.name}</Name>
+            </ProfileBox>
+          );
+      })}
+    </>
   );
 };
 
-const HomeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 const Banner = styled.div`
   height: 27px;
   background-color: #c5c4c1;
@@ -89,10 +83,6 @@ const Name = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-const FriendsProfileList = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export default Home;

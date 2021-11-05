@@ -4,31 +4,29 @@ import styled from 'styled-components';
 import { AiTwotoneHome, AiFillWechat, AiOutlineUser } from 'react-icons/ai';
 
 const Navigation = () => (
-  <nav>
-    <NavContainer>
-      <NavItem>
-        <Link to={`/`}>
-          <AiTwotoneHome size="30" color="#777777" />
-        </Link>
-      </NavItem>
-      <NavItem>
-        <Link to={`/chatlist`}>
-          <AiFillWechat size="30" color="#777777" />
-        </Link>
-      </NavItem>
-      <NavItem>
-        <Link to={`/profile`}>
-          <AiOutlineUser size="30" color="#777777" />
-        </Link>
-      </NavItem>
-    </NavContainer>
-  </nav>
+  <NavContainer>
+    <NavItem>
+      <Link to={`/`}>
+        <AiTwotoneHome size="30" color="#777777" />
+      </Link>
+    </NavItem>
+    <NavItem>
+      <Link to={`/chatlist`}>
+        <AiFillWechat size="30" color="#777777" />
+      </Link>
+    </NavItem>
+    <NavItem>
+      <Link to={`/profile`}>
+        <AiOutlineUser size="30" color="#777777" />
+      </Link>
+    </NavItem>
+  </NavContainer>
 );
 
-const NavContainer = styled.div`
+const NavContainer = styled.nav`
   display: flex;
-  height: 100%;
   flex-direction: column;
+  height: 100%;
   padding: 20px 20px 0px 20px;
   background-color: #ffffff;
 `;

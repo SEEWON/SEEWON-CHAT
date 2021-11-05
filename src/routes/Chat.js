@@ -1,15 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
-import { AiOutlineSend } from 'react-icons/ai';
+import ChatForm from './ChatForm';
 import { FBrealtime } from '../fbase';
-import { onValue, ref, set } from '@firebase/database';
+import { onValue, ref } from '@firebase/database';
+import styled from 'styled-components';
 
-const Chat = ({ userObj, friendUid, friend }) => {
-  const [message, setMessage] = useState('');
+const Chat = ({ userObj, friend }) => {
   const [chatObjData, setChatObjData] = useState();
   const [chatArrayData, setChatArrayData] = useState([]);
-  const chatRoomID = [userObj.uid, friendUid].sort();
-  const now = new Date();
+  const chatRoomID = [userObj.uid, friend.uid].sort();
 
   //Scroll Event
   const scrollRef = useRef();
@@ -37,40 +35,6 @@ const Chat = ({ userObj, friendUid, friend }) => {
     pushChatsInArray();
   }, [chatObjData]);
 
-  const handleSubmitForm = (event) => {
-    event.preventDefault();
-
-    //공백 메시지 입력 방지
-    if (message === '') {
-      alert('보낼 메시지를 입력하세요.');
-      return false;
-    }
-
-    const writeMsgOnDB = async () => {
-      await set(ref(FBrealtime, `${chatRoomID}/${now.getTime()}`), {
-        talker: userObj.uid,
-        msg: message,
-        sendAt: `${
-          now.getMonth() + 1
-        }-${now.getDate()}-${now.getHours()}-${now.getMinutes()}`,
-      }).catch((error) =>
-        alert(
-          `${error.message}
-          에러가 발생했습니다. 새로고침 후 다시 시도해 주세요`
-        )
-      );
-    };
-    writeMsgOnDB();
-    setMessage('');
-  };
-
-  //카카오톡처럼 엔터 입력 시 Form submit되게 구현, 줄바꿈은 shift + enter
-  const onEnterPress = (e) => {
-    if (e.keyCode == 13 && e.shiftKey == false) {
-      e.preventDefault();
-      handleSubmitForm(e);
-    }
-  };
   return (
     <ChatWrapper>
       <ChattingScreen ref={scrollRef}>
@@ -82,7 +46,7 @@ const Chat = ({ userObj, friendUid, friend }) => {
         </>
         {chatArrayData.map((eachMsg, index) => {
           return (
-            <>
+            <div key={index}>
               {
                 /*연속해서 채팅 올 경우 친구 프로필 한번만 표시*/
                 chatArrayData[index - 1] &&
@@ -100,28 +64,11 @@ const Chat = ({ userObj, friendUid, friend }) => {
               >
                 <EachMsg>{eachMsg.msg}</EachMsg>
               </EachMsgContainer>
-            </>
+            </div>
           );
         })}
       </ChattingScreen>
-      <MessageForm>
-        <Form onSubmit={handleSubmitForm}>
-          <InputChat
-            placeholder="보낼 메시지를 입력하세요."
-            value={message}
-            type="text"
-            onChange={(e) => {
-              setMessage(e.target.value);
-            }}
-            onKeyDown={(e) => {
-              onEnterPress(e);
-            }}
-          />
-          <InputButton type="submit">
-            <Send>전송</Send>
-          </InputButton>
-        </Form>
-      </MessageForm>
+      <ChatForm userObj={userObj} chatRoomID={chatRoomID} />
     </ChatWrapper>
   );
 };
@@ -166,49 +113,6 @@ const EachMsg = styled.div`
   border-radius: 5px;
   padding: 7px;
   margin: 3px;
-`;
-
-const MessageForm = styled.div`
-  width: 100%;
-  height: 20%;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f6f2;
-  border-top: 1px solid gray;
-`;
-const Form = styled.form`
-  width: 100%;
-  height: 100%;
-`;
-const InputChat = styled.textarea`
-  width: 75%;
-  height: 80%;
-  background-color: #f7f6f2;
-  font-size: 1rem;
-  word-wrap: break-word;
-  word-break: break-all;
-  padding: 10px;
-  border: none;
-  resize: none;
-  outline: none;
-  box-shadow: none;
-`;
-const InputButton = styled.button`
-  position: absolute;
-  top: 8px;
-  right: 2px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-const Send = styled.div`
-  padding: 3px 6px;
-  border: 0.5px solid gray;
-  border-radius: 10%;
-  box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
-  background-color: #c8c6c6;
 `;
 
 export default Chat;

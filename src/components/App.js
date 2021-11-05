@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Router from './Router';
-import { createGlobalStyle } from 'styled-components';
-import styled from 'styled-components';
 import { FBauth, FBstorage } from '../fbase';
 import { onAuthStateChanged } from '@firebase/auth';
 import { getDownloadURL, listAll, ref } from '@firebase/storage';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const App = () => {
   const [init, setInit] = useState(false);
@@ -23,13 +22,12 @@ const App = () => {
     });
   });
 
-  //Storage에서 프로필 사진, 닉네임 목록 불러오기
+  //Firebase Storage에서 프로필 사진, 닉네임 목록 불러오기
   let tempImg = [];
   let tempName = [];
   let tempUid = [];
   let tempProfile = [];
   const [profileList, setProfileList] = useState([]);
-  const [uidList, setUidList] = useState([]);
 
   useEffect(() => {
     const listProfile = async () => {
@@ -42,10 +40,13 @@ const App = () => {
         tempImg.push(url);
       }
       tempName.forEach((eachName, index) => {
-        tempProfile.push({ name: eachName, img: tempImg[index] });
+        tempProfile.push({
+          name: eachName,
+          img: tempImg[index],
+          uid: tempUid[index],
+        });
       });
       setProfileList(tempProfile);
-      setUidList(tempUid);
     };
     listProfile();
   }, []);
@@ -57,22 +58,21 @@ const App = () => {
   };
 
   return (
-    <RootContainer>
+    <>
       {init ? (
-        <Wrapper>
+        <RootContainer>
           <GlobalStyle />
           <Router
             refreshUser={refreshUser}
             isLoggedIn={isLoggedIn}
             userObj={userObj}
             profileList={profileList}
-            uidList={uidList}
           />
-        </Wrapper>
+        </RootContainer>
       ) : (
         'Initializing...'
       )}
-    </RootContainer>
+    </>
   );
 };
 
@@ -96,7 +96,6 @@ const RootContainer = styled.div`
   border: 1.5px solid gray;
   background-image: linear-gradient(#f7f6f2 50%, #c8c6c6 50%);
   background-color: #f0e5cf;
-  display: flex;
   overflow: auto;
   @font-face {
     font-family: 'GowunDodum-Regular';
@@ -106,10 +105,6 @@ const RootContainer = styled.div`
     font-style: normal;
   }
   font-family: 'GowunDodum-Regular';
-`;
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
 `;
 
 export default App;
