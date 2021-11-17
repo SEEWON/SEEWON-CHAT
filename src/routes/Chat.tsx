@@ -12,7 +12,7 @@ type ChatProps = {
 const Chat = ({ userObj, friend }: ChatProps) => {
   const [chatObjData, setChatObjData] = useState<any>();
   const [chatArrayData, setChatArrayData] = useState<any>([]);
-  const chatRoomID = [userObj.uid, friend.uid].sort();
+  const chatRoomID: string[] = [userObj.uid, friend.uid].sort();
 
   //Scroll Event
   const scrollRef: any = useRef<HTMLDivElement>();

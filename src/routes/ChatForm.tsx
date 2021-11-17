@@ -3,11 +3,16 @@ import { FBrealtime } from '../fbase';
 import { ref, set } from '@firebase/database';
 import styled from 'styled-components';
 
-const ChatForm = ({ userObj, chatRoomID }) => {
+type ChatFormProps = {
+  userObj: any;
+  chatRoomID: string[];
+};
+
+const ChatForm = ({ userObj, chatRoomID }: ChatFormProps) => {
   const [message, setMessage] = useState('');
   const now = new Date();
 
-  const handleSubmitForm = (event) => {
+  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     //공백 메시지 입력 방지
@@ -35,10 +40,11 @@ const ChatForm = ({ userObj, chatRoomID }) => {
   };
 
   //카카오톡처럼 엔터 입력 시 Form submit되게 구현, 줄바꿈은 shift + enter
-  const onEnterPress = (e) => {
-    if (e.keyCode == 13 && e.shiftKey == false) {
-      e.preventDefault();
-      handleSubmitForm(e);
+  //d.ts 상에는 타입이 React.KeyboardEventHandler<HTMLTextAreaElement>인데 그렇게 하면 keyCode와 shiftKey 속성을 못 씀 ㅠㅠ
+  const onEnterPress = (event: any) => {
+    if (event.keyCode == 13 && event.shiftKey == false) {
+      event.preventDefault();
+      handleSubmitForm(event);
     }
   };
 
@@ -48,7 +54,6 @@ const ChatForm = ({ userObj, chatRoomID }) => {
         <InputChat
           placeholder="보낼 메시지를 입력하세요."
           value={message}
-          type="text"
           onChange={(e) => {
             setMessage(e.target.value);
           }}
