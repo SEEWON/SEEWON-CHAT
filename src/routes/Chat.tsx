@@ -4,13 +4,18 @@ import { FBrealtime } from '../fbase';
 import { onValue, ref } from '@firebase/database';
 import styled from 'styled-components';
 
-const Chat = ({ userObj, friend }) => {
-  const [chatObjData, setChatObjData] = useState();
-  const [chatArrayData, setChatArrayData] = useState([]);
+type ChatProps = {
+  userObj: any;
+  friend: any;
+};
+
+const Chat = ({ userObj, friend }: ChatProps) => {
+  const [chatObjData, setChatObjData] = useState<any>();
+  const [chatArrayData, setChatArrayData] = useState<any>([]);
   const chatRoomID = [userObj.uid, friend.uid].sort();
 
   //Scroll Event
-  const scrollRef = useRef();
+  const scrollRef: any = useRef<HTMLDivElement>();
   useEffect(() => {
     scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
   });
@@ -25,7 +30,7 @@ const Chat = ({ userObj, friend }) => {
 
   //객체 형태로 chatObjData에 저장된 데이터를 배열로 바꿔주기 위한 useEffect
   useEffect(() => {
-    const temp = [];
+    const temp: object[] = [];
     const pushChatsInArray = () => {
       for (const key in chatObjData) {
         temp.push(chatObjData[key]);
@@ -44,7 +49,7 @@ const Chat = ({ userObj, friend }) => {
             <FriendName>{friend.name}</FriendName>
           </FriendProfile>
         </>
-        {chatArrayData.map((eachMsg, index) => {
+        {chatArrayData.map((eachMsg: any, index: number) => {
           return (
             <div key={index}>
               {
@@ -87,7 +92,7 @@ const ChattingScreen = styled.div`
   flex-direction: column;
   overflow-y: scroll;
 `;
-const EachMsgContainer = styled.div`
+const EachMsgContainer = styled.div<{ userTalking: boolean }>`
   width: ${(props) => (props.userTalking ? '99%' : '80%')};
   display: flex;
   justify-content: ${(props) =>
