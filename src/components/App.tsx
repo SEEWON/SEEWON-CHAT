@@ -8,7 +8,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 const App = () => {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState(null);
+  const [userObj, setUserObj] = useState({});
 
   useEffect(() => {
     onAuthStateChanged(FBauth, (user) => {
@@ -23,18 +23,18 @@ const App = () => {
   });
 
   //Firebase Storage에서 프로필 사진, 닉네임 목록 불러오기
-  let tempImg = [];
-  let tempName = [];
-  let tempUid = [];
-  let tempProfile = [];
-  const [profileList, setProfileList] = useState([]);
+  let tempImg: string[] = [];
+  let tempName: string[] = [];
+  let tempUid: string[] = [];
+  let tempProfile: object[] = [];
+  const [profileList, setProfileList] = useState<object[]>([]);
 
   useEffect(() => {
     const listProfile = async () => {
       const profileRef = ref(FBstorage);
-      const listResult = await listAll(profileRef);
+      const listResult: any = await listAll(profileRef);
       for (let imageRef of listResult.items) {
-        const url = await getDownloadURL(imageRef);
+        const url: string = await getDownloadURL(imageRef);
         tempName.push(imageRef._location.path_.split('$')[0]);
         tempUid.push(imageRef._location.path_.split('$')[1]);
         tempImg.push(url);
@@ -54,7 +54,6 @@ const App = () => {
   const refreshUser = () => {
     const userNow = FBauth.currentUser;
     setUserObj({ ...userNow });
-    setUserObj(userNow);
   };
 
   return (

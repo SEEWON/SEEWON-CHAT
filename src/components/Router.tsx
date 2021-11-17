@@ -9,7 +9,19 @@ import styled from 'styled-components';
 const Home = lazy(() => import('../routes/Home'));
 const ChatList = lazy(() => import('../routes/ChatList'));
 
-const Router = ({ refreshUser, isLoggedIn, userObj, profileList }) => {
+type RouterProps = {
+  refreshUser: () => void;
+  isLoggedIn: boolean;
+  userObj: any;
+  profileList: any[];
+};
+
+const Router = ({
+  refreshUser,
+  isLoggedIn,
+  userObj,
+  profileList,
+}: RouterProps) => {
   return (
     <Appwrapper>
       <BrowserRouter>
