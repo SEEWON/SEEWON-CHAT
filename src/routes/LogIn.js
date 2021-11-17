@@ -1,3 +1,5 @@
+//window.recaptchaVerifier부분의 type을 모르겠어서 이 파일은 js로 유지!
+
 import React, { useState } from 'react';
 import { FBauth } from '../fbase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from '@firebase/auth';

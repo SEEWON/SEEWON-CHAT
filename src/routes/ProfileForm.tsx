@@ -5,10 +5,24 @@ import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 import { DataURL } from './DataURL';
 import styled from 'styled-components';
 
-const ProfileForm = ({ refreshUser, userObj, fileURL, setFileURL }) => {
+type ProfileFormProps = {
+  refreshUser: () => void;
+  userObj: any;
+  fileURL: string;
+  setFileURL: React.Dispatch<any>;
+};
+
+const ProfileForm = ({
+  refreshUser,
+  userObj,
+  fileURL,
+  setFileURL,
+}: ProfileFormProps) => {
   const [userName, setUserName] = useState(userObj.displayName);
 
-  const handleSubmitProfile = async (event) => {
+  const handleSubmitProfile = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     let FBprofileImgURL = '';
     //첨부파일이 있을 경우 Firebase Storage에 파일 등록, URL 받아오기
@@ -32,7 +46,8 @@ const ProfileForm = ({ refreshUser, userObj, fileURL, setFileURL }) => {
     setFileURL('');
   };
 
-  const handleFileChange = (event) => {
+  //type이 React.ChangeEventHandler<HTMLInputElement>인데, event.target.files[0]가 null일 경우 타입 에러 발생
+  const handleFileChange = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {

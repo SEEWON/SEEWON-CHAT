@@ -5,7 +5,12 @@ import { signOut } from '@firebase/auth';
 import DefaultProfile from './DefaultProfile.png';
 import styled from 'styled-components';
 
-const Profile = ({ refreshUser, userObj }) => {
+type ChatFormProps = {
+  userObj: any;
+  refreshUser: () => void;
+};
+
+const Profile = ({ refreshUser, userObj }: ChatFormProps) => {
   const [fileURL, setFileURL] = useState('');
 
   return (
