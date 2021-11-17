@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Home = ({ userObj, profileList }) => {
+type HomeProps = {
+  userObj: any;
+  profileList: any[];
+};
+
+const Home = ({ userObj, profileList }: HomeProps) => {
   const [searchFriend, setSearchFriend] = useState('');
-  const [renderProfileList, setRenderProfileList] = useState([]);
+  const [renderProfileList, setRenderProfileList] =
+    useState<any[]>(profileList);
 
   //비동기적으로 작동하는 setState에서 profileNameList값이 호출된 후 renderNameList, renderImgList state에 정상적으로 값을 넣어주기 위해 spread operator 사용
   useEffect(() => {

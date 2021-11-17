@@ -8,7 +8,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 const App = () => {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState({});
+  const [userObj, setUserObj] = useState<object | null>();
 
   useEffect(() => {
     onAuthStateChanged(FBauth, (user) => {
