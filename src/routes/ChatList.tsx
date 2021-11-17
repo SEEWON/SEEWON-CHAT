@@ -2,9 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const ChatList = ({ userObj, profileList }) => {
+type ChatListProps = {
+  userObj: any;
+  profileList: any[];
+};
+
+const ChatList = ({ userObj, profileList }: ChatListProps) => {
   const [searchFriend, setSearchFriend] = useState('');
-  const [renderProfileList, setRenderProfileList] = useState([]);
+  const [renderProfileList, setRenderProfileList] =
+    useState<any[]>(profileList);
 
   useEffect(() => {
     setRenderProfileList([...profileList]);
