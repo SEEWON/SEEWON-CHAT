@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import useSearch from '../hooks/useSearch';
 
 type ChatListProps = {
   userObj: any;
@@ -8,21 +9,7 @@ type ChatListProps = {
 };
 
 const ChatList = ({ userObj, profileList }: ChatListProps) => {
-  const [searchFriend, setSearchFriend] = useState('');
-  const [renderProfileList, setRenderProfileList] =
-    useState<any[]>(profileList);
-
-  useEffect(() => {
-    setRenderProfileList([...profileList]);
-  }, [profileList]);
-
-  useEffect(() => {
-    setRenderProfileList(
-      profileList.filter((item) =>
-        item.name.toLowerCase().includes(searchFriend.toLowerCase())
-      )
-    );
-  }, [searchFriend]);
+  const [onSearchChange, renderProfileList] = useSearch(profileList);
 
   return (
     <>
@@ -31,10 +18,10 @@ const ChatList = ({ userObj, profileList }: ChatListProps) => {
         <SearchFriend
           type="text"
           placeholder="채팅 상대를 검색해 보세요!"
-          onChange={(e) => setSearchFriend(e.target.value)}
+          onChange={onSearchChange}
         ></SearchFriend>
       </SearchWrapper>
-      {renderProfileList.map((friend, index) => {
+      {renderProfileList.map((friend: any, index: number) => {
         // 자신의 프로필을 제외하고 렌더링
         if (userObj.uid !== friend.uid)
           return (
