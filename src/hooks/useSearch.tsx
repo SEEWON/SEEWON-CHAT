@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const useSearch = (profileList) => {
+const useSearch = (profileList: any) => {
   const [searchFriend, setSearchFriend] = useState('');
   const [renderProfileList, setRenderProfileList] = useState(profileList);
 
@@ -12,13 +12,13 @@ const useSearch = (profileList) => {
   //검색 시 renderProfileList를 수정해 주는 useEffect
   useEffect(() => {
     setRenderProfileList(
-      profileList.filter((item) =>
+      profileList.filter((item: any) =>
         item.name.toLowerCase().includes(searchFriend.toLowerCase())
       )
     );
   }, [searchFriend]);
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchFriend(event.currentTarget.value);
   };
 
