@@ -1,4 +1,4 @@
-//window.recaptchaVerifier부분의 type을 모르겠어서 이 파일은 js로 유지!
+//전화번호 인증 구현 부분 때문에 해당 파일은 js로 유지하겠습니다!
 
 import React, { useState } from 'react';
 import { FBauth } from '../fbase';
