@@ -19,6 +19,7 @@ Stacks : React.js w/ Typescript, Firebase
 5. 지난 과제에서 받았던 리뷰들을 반영한, 깨끗한 코드를 위한 컴포넌트의 분리
 6. 완성도 있는 결과물을 향한 CSS에 대한 고민
 7. 리액트에 대한 이해 한 스푼 더
+8. Typescript 적용법과 Custom Hook 구현 
 
 ## Demos/프로젝트 동작
 ### 초기 페이지
